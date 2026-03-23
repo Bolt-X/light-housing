@@ -1,128 +1,237 @@
 'use client';
-import React from 'react';
-import NextImg from '@/src/components/common/next-img';
-import { useMetadata } from '@/src/providers/MetadataProvider';
-import Link from 'next/link';
-import CustomLink from '../custom-link';
-import { useTranslations } from 'next-intl';
-import { cn } from '@/src/lib/utils';
+import { useState } from 'react';
 
-export default function TheFooter() {
-  const t = useTranslations();
-  const metadata = useMetadata();
-  const contact_information = metadata?.contact_information;
-  const bottom_navigation = metadata?.bottom_navigation;
+const contactInfoItems = [
+  {
+    icon: '/assets/icons/map_point.svg',
+    alt: 'Outline map location',
+    text: 'Số 11B Cát Linh, phường Ô Chợ Dừa, thành phố Hà Nội',
+  },
+  {
+    icon: '/assets/icons/mail.svg',
+    alt: 'Huge icon',
+    text: 'info@lighthousing.vn',
+  },
+  {
+    icon: '/assets/icons/phone.svg',
+    alt: 'Outline call phone',
+    text: '098 904 8810',
+  },
+];
 
-  // Combining sub_items from bottom navigation sections for the two-column quick links
-  // We'll take sub_items from the first few sections if they exist
-  const all_quick_links =
-    bottom_navigation?.flatMap((section: any) => section.sub_items) || [];
+const aboutLinks = [
+  'Về Lighthousing',
+  'Cẩm nang mua nhà',
+  'Chính sách',
+  'Tin tức',
+];
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+const socialIcons = [
+  {
+    src: 'https://c.animaapp.com/Bhe9g9ou/img/huge-icon-social-solid-facebook-1.svg',
+    alt: 'Huge icon social facebook',
+  },
+  {
+    src: 'https://c.animaapp.com/Bhe9g9ou/img/huge-icon-social-solid-youtube-1.svg',
+    alt: 'Huge icon social youtube',
+  },
+  {
+    src: 'https://c.animaapp.com/Bhe9g9ou/img/huge-icon-social-solid-messenger-1.svg',
+    alt: 'Huge icon social messenger',
+  },
+];
+
+const TheFooter = (): React.ReactNode => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
   };
 
   return (
-    <footer className="min-h-[400px] bg-[#0d4a4a] pb-8 pt-16 text-white lg:pt-24">
-      <div className="container">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-          {/* Column 1: Logo & Description */}
-          <div className="space-y-6 lg:col-span-4">
-            <Link href="/" className="relative inline-block h-24 w-60">
-              <NextImg
-                src="/assets/logo/logo_primary_light.svg"
-                alt="Ramond Urbaniz Sam Son"
-                className="object-contain object-left"
-              />
-            </Link>
-            <p className="max-w-[340px] text-sm leading-relaxed text-white/70">
-              Ramond Urbaniz không chỉ mang đến hệ sinh thái nhà ở – thương mại
-              – cảnh quan – tiện ích đẳng cấp, mà còn góp phần thay đổi diện mạo
-              đô thị nơi đây.
-            </p>
-          </div>
+    <footer className="relative flex w-full flex-col gap-6 bg-[linear-gradient(143deg,rgba(2,58,92,1)_0%,rgba(115,175,214,1)_100%)] p-4 md:gap-8 md:p-8 lg:gap-10 lg:py-12 xl:gap-12 xl:py-12 2xl:p-20 3xl:py-[100px]">
+      <div className="flex w-full flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-[60px] 4xl:mx-auto 4xl:max-w-[1880px]">
+        {/* LOGO & INFO */}
+        <div className="flex flex-col items-center gap-6 md:items-start md:gap-8 lg:flex-[1_0_400px] xl:flex-[1_0_500px]">
+          <img
+            className="h-10 w-fit object-contain xl:h-16"
+            alt="Logo white"
+            src="/assets/logo/logo_primary_light.svg"
+          />
 
-          {/* Column 2: VỀ CHÚNG TÔI */}
-          <div className="space-y-8 lg:col-span-4">
-            <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white/50">
-              VỀ CHÚNG TÔI
+          <div className="flex flex-col gap-4 md:gap-6">
+            <h3 className="text-lg font-bold text-white md:text-lg lg:text-[22px] xl:text-[30px] 4xl:text-[36px]">
+              CÔNG TY CỔ PHẦN LIGHT HOUSING
             </h3>
-            <div className="space-y-4 text-sm font-medium">
-              <div className="flex gap-2">
-                <span className="shrink-0 text-white/50">Hotline:</span>
-                <a
-                  href={`tel:${contact_information?.hot_line}`}
-                  className="text-white/80 transition-colors hover:text-white"
-                >
-                  {contact_information?.hot_line}
-                </a>
-              </div>
-              <div className="flex gap-2">
-                <span className="shrink-0 text-white/50">Email:</span>
-                <a
-                  href={`mailto:${contact_information?.email}`}
-                  className="break-all text-white/80 transition-colors hover:text-white"
-                >
-                  {contact_information?.email}
-                </a>
-              </div>
-              <div className="flex gap-2">
-                <span className="shrink-0 text-white/50">Facebook:</span>
-                <a
-                  href="#"
-                  className="text-white/80 transition-colors hover:text-white"
-                >
-                  Fanpage Ramond Urbaniz Sầm Sơn
-                </a>
-              </div>
-              <div className="flex gap-2">
-                <span className="shrink-0 text-white/50">Địa chỉ:</span>
-                <span className="leading-relaxed text-white/80">
-                  {contact_information?.address}
-                </span>
-              </div>
-            </div>
-          </div>
 
-          {/* Column 3: LIÊN KẾT NHANH */}
-          <div className="space-y-8 lg:col-span-4">
-            <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white/50">
-              LIÊN KẾT NHANH
-            </h3>
-            <div className="grid grid-cols-2 gap-x-8 gap-y-4">
-              {all_quick_links.slice(0, 8).map((link: any, idx: number) => (
-                <CustomLink
-                  key={idx}
-                  href={link.url}
-                  className="transform text-sm text-white/70 transition-all hover:translate-x-1 hover:text-white"
+            <div className="flex flex-col gap-3">
+              {contactInfoItems.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex cursor-pointer items-start gap-4 transition-transform hover:translate-x-1"
                 >
-                  {link.title}
-                </CustomLink>
+                  <img
+                    className="h-5 w-5 3xl:h-6 3xl:w-6"
+                    alt={item.alt}
+                    src={item.icon}
+                  />
+                  <p className="text-sm leading-relaxed text-white/80 md:text-base">
+                    {item.text}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Footer Bottom */}
-        <div className="mt-20 flex flex-col items-center justify-between gap-6 border-t border-white/5 pt-8 md:flex-row">
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/30">
-            © 2025 — RAMOND URBANIZ SAM SON
-          </p>
+        <div className="flex flex-col gap-4 md:gap-6 lg:flex-[1_0_156px] xl:flex-[1_0_200px] xl:flex-row 2xl:flex-[1_0_380px] 2xl:gap-[60px] 3xl:flex-[1_0_440px]">
+          {/* NAVIGATION */}
+          <div className="flex flex-col gap-4 md:gap-6 4xl:flex-1">
+            <h4 className="text-lg font-bold text-white md:text-lg 3xl:text-[22px]">
+              Về chúng tôi
+            </h4>
 
-          <button
-            onClick={scrollToTop}
-            title="Cuộn lên đầu trang"
-            className="group relative flex size-12 items-center justify-center rounded-full border border-white/10 transition-all hover:border-white/40 hover:bg-white/5"
+            <nav className="flex flex-col gap-3 2xl:gap-4">
+              {aboutLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className="text-sm text-white/80 transition-colors hover:text-white md:text-base"
+                >
+                  {link}
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          {/* SOCIAL & APPS */}
+          <div className="flex flex-col gap-10 2xl:gap-[60px]">
+            <div className="flex flex-col gap-4 md:gap-6">
+              <h4 className="text-lg font-bold text-white md:text-lg 3xl:text-[22px]">
+                Theo dõi chúng tôi
+              </h4>
+              <div className="flex items-start gap-4 xl:gap-6">
+                {socialIcons.map((icon, index) => (
+                  <a
+                    key={index}
+                    href="#"
+                    className="transition-transform hover:scale-110"
+                  >
+                    <img className="h-6 w-6" alt={icon.alt} src={icon.src} />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-4 md:gap-6">
+              <h4 className="text-lg font-bold text-white md:text-lg 3xl:text-[22px]">
+                Ứng dụng
+              </h4>
+              <div className="flex flex-wrap gap-4 xl:flex-col 4xl:flex-row">
+                <a
+                  href="#"
+                  className="flex h-10 w-[120px] items-center gap-2 rounded-lg border border-white/20 bg-white p-2 transition-colors hover:bg-white"
+                >
+                  <img
+                    className="h-6 w-6"
+                    alt="Glyphs play store"
+                    src="/assets/icons/play store.svg"
+                  />
+
+                  <div>
+                    <p className="text-[6px] text-gray-500">Download on the</p>
+                    <p className="text-xs font-bold text-gray-900">
+                      Play Store
+                    </p>
+                  </div>
+                </a>
+
+                <a
+                  href="#"
+                  className="flex h-10 w-[120px] items-center gap-2 rounded-lg border border-white bg-white p-2 transition-colors hover:bg-white"
+                >
+                  <img
+                    className="h-6 w-6"
+                    alt="Glyphs app store"
+                    src="/assets/icons/app store.svg"
+                  />
+
+                  <div>
+                    <p className="text-[6px] text-gray-500">Download on the</p>
+                    <p className="text-xs font-bold text-gray-900">App Store</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CONTACT FORM */}
+        <div className="flex flex-col gap-6 lg:max-w-md">
+          <h4 className="text-lg font-bold text-white md:text-lg 3xl:text-[22px]">
+            Gửi tin nhắn cho chúng tôi
+          </h4>
+
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col flex-wrap gap-3 xl:gap-4"
           >
-            <div className="relative size-5 rotate-180 transition-transform group-hover:-translate-y-1">
-              <NextImg
-                src="/assets/icons/arrow_down_white.svg"
-                alt="Back to top"
+            <div className="flex w-full flex-wrap gap-3">
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Họ và tên..."
+                className="text-brand-dark placeholder:text-brand-dark/70 w-full rounded-lg bg-white/50 px-3 py-2 text-sm outline-none md:w-[calc(50%_-_8px)] lg:w-full lg:text-base"
+              />
+
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Nhập địa chỉ mail"
+                className="text-brand-dark placeholder:text-brand-dark/70 w-full rounded-lg bg-white/50 px-3 py-2 text-sm outline-none md:w-[calc(50%_-_8px)] lg:w-full lg:text-base"
               />
             </div>
-          </button>
+
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Họ và tên"
+              className="text-brand-dark placeholder:text-brand-dark/70 min-h-[120px] w-full resize-none rounded-lg bg-white/50 px-3 py-2 text-sm outline-none lg:text-base"
+              rows={4}
+            />
+
+            <button
+              type="submit"
+              className="hover:bg-brand w-full rounded-lg bg-[#023A5C] py-3 text-base font-semibold text-white transition-all"
+            >
+              Gửi tin nhắn
+            </button>
+          </form>
         </div>
+      </div>
+
+      <div className="flex w-full items-center justify-center border-t border-white/50 pt-6 text-center lg:pt-8 xl:items-start xl:justify-start xl:pt-10 xl:text-left xl:text-base 4xl:mx-auto 4xl:max-w-[1880px]">
+        <p className="text-sm font-normal text-white">
+          Copyright © 2025 LIGHT HOUSING. All rights reserved.
+        </p>
       </div>
     </footer>
   );
-}
+};
+
+export default TheFooter;

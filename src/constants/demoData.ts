@@ -54,7 +54,7 @@ export const DEMO_SECTIONS: Record<string, any[]> = {
     {
       type: 'team-grid',
       title: 'Our Executive Team',
-      subtitle: 'The visionaries behind Ramond Urbaniz',
+      subtitle: 'The visionaries behind Light Housing',
       items: [
         {
           title: 'John Smith',

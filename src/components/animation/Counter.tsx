@@ -75,7 +75,12 @@ export default function Counter({
     },
     {
       scope: containerRef,
-      dependencies: [animateOnScroll, once, onAnimationComplete, ...dependencies],
+      dependencies: [
+        animateOnScroll,
+        once,
+        onAnimationComplete,
+        ...dependencies,
+      ],
     },
   );
 

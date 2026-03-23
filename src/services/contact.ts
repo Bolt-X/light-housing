@@ -1,14 +1,20 @@
-import { directusClient } from "@/src/lib/directus";
+import { directusClient } from '@/src/lib/directus';
 
 export interface ContactInfo {
-  title?: string | null
+  title?: string | null;
   name: string;
   email: string;
   phone: string;
   message: string;
 }
 
-export const fnSendContact = async ({ title, name, email, phone, message }: ContactInfo) => {
+export const fnSendContact = async ({
+  title,
+  name,
+  email,
+  phone,
+  message,
+}: ContactInfo) => {
   try {
     const query = `
         mutation {
@@ -23,14 +29,14 @@ export const fnSendContact = async ({ title, name, email, phone, message }: Cont
     `;
 
     const response = await directusClient.query(query);
-    return response?.create_contact_tickets_item
+    return response?.create_contact_tickets_item;
   } catch (error) {
-    console.log("Error sending contact: ", error)
+    console.log('Error sending contact: ', error);
   }
-}
+};
 
 export interface ReviewInfo {
-  title?: string | null
+  title?: string | null;
   name: string;
   email: string;
   phone: string;
@@ -38,7 +44,14 @@ export interface ReviewInfo {
   rating: number | null;
 }
 
-export const fnSendReview = async ({ title, name, email, phone, message, rating }: ReviewInfo) => {
+export const fnSendReview = async ({
+  title,
+  name,
+  email,
+  phone,
+  message,
+  rating,
+}: ReviewInfo) => {
   try {
     const query = `
         mutation {
@@ -54,8 +67,8 @@ export const fnSendReview = async ({ title, name, email, phone, message, rating 
     `;
 
     const response = await directusClient.query(query);
-    return response?.create_quality_assessment_item
+    return response?.create_quality_assessment_item;
   } catch (error) {
-    console.log("Error sending review: ", error)
+    console.log('Error sending review: ', error);
   }
-}
+};

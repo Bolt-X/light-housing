@@ -3,7 +3,6 @@
 import React, { useRef, useState } from 'react';
 import { DialogDescription } from '@radix-ui/react-dialog';
 import { useScrollSmoother } from '@/src/providers/ScrollSmootherProvider';
-import NextImg from '../next-img';
 import {
   AccordionContent,
   AccordionItem,
@@ -17,23 +16,40 @@ import {
   DialogClose,
   DialogTitle,
 } from '../../ui/dialog';
-import { useMetadata } from '@/src/providers/MetadataProvider';
 import CustomLink from '../custom-link';
-import { cn } from '@/src/lib/utils';
-import { useTranslations } from 'next-intl';
 import { Link } from '@/src/i18n/navigation';
 
 type MobileMenuProps = {
   handleSearch: (key: string, value: string) => void;
 };
 
-export default function MobileMenu({ handleSearch }: MobileMenuProps) {
-  const metadata = useMetadata();
-  const top_navigation = metadata?.top_navigation;
-  const t = useTranslations();
+// Dummy navigation mapped to the design requirements
+const DUMMY_NAVIGATION = [
+  { title: 'TRANG CHỦ', url: '/' },
+  {
+    title: 'DỰ ÁN',
+    url: '#',
+    sub_items: [
+      { title: 'LH HẢI PHÒNG', url: '#' },
+      { title: 'LH NHA TRANG', url: '#' },
+      { title: 'LH QUẢNG TRỊ', url: '#' },
+      { title: 'LH HUẾ', url: '#' },
+    ],
+  },
+  { title: 'CẨM NANG MUA NHÀ QUỐC DÂN', url: '#' },
+  {
+    title: 'TIN TỨC',
+    url: '#',
+    sub_items: [
+      { title: 'ĐỐI TÁC', url: '#' },
+      { title: 'TUYỂN DỤNG', url: '#' },
+      { title: 'LIÊN HỆ', url: '#' },
+    ],
+  },
+];
 
+export default function MobileMenu({ handleSearch }: MobileMenuProps) {
   const [isOpenSubMenu, setIsOpenSubMenu] = useState<boolean>(false);
-  const [itemSecond, setItemSecond] = useState<any>();
   const [searchText, setSearchText] = useState<string>('');
   const { smoother } = useScrollSmoother();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -45,15 +61,13 @@ export default function MobileMenu({ handleSearch }: MobileMenuProps) {
         asChild
         className="block"
       >
-        <button className="flex size-10 items-center justify-center lg:hidden">
-          <div className="relative size-6">
-            <img
-              src="/assets/icons/ham_menu.svg"
-              alt="menu icon"
-              loading="eager"
-              className="size-full brightness-0"
-            />
-          </div>
+        <button className="relative size-10">
+          <img
+            src="/assets/icons/ham_menu.svg"
+            alt="menu icon"
+            loading="eager"
+            className="size-full"
+          />
         </button>
       </DialogTrigger>
 
@@ -63,9 +77,9 @@ export default function MobileMenu({ handleSearch }: MobileMenuProps) {
           <DialogDescription>Mobile menu</DialogDescription>
         </div>
 
-        <div className="container flex h-screen flex-col items-stretch overflow-hidden bg-white">
+        <div className="bg-brand-50 flex h-[100dvh] flex-col items-stretch gap-6 overflow-hidden">
           {/* header */}
-          <div className="flex items-center justify-between border-b border-gray-100 py-4">
+          <div className="flex items-center justify-between px-[30px] pb-2 pt-6">
             <DialogClose
               onClick={() => {
                 setIsOpenSubMenu(false);
@@ -77,108 +91,176 @@ export default function MobileMenu({ handleSearch }: MobileMenuProps) {
               <Link
                 href={'/' as any}
                 aria-label="Chuyển đến trang chủ"
-                className="relative h-10 w-40"
+                className="relative aspect-[22/8] h-8 overflow-hidden"
               >
-                <NextImg
-                  src="/assets/logo/logo_primary_dark.svg"
-                  alt="Ramond Urbaniz logo"
-                  className="object-contain"
+                <img
+                  src="/assets/logo/logo_primary_light.svg"
+                  alt="Light Housing logo"
+                  className="h-full w-full object-contain object-left"
                   loading="eager"
                   fetchPriority="high"
                 />
               </Link>
             </DialogClose>
 
-            <div className="flex items-center gap-4">
-              <DialogClose
-                ref={closeButtonRef}
-                onClick={() => {
-                  setIsOpenSubMenu(false);
-                  smoother?.paused(false);
-                }}
-                asChild
-                className="border-none outline-none"
-              >
-                <div className="flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors hover:bg-gray-100">
-                  <div className="relative size-5">
-                    <img
-                      src="/assets/icons/close.svg"
-                      alt="close icon"
-                      className="size-full brightness-0"
-                    />
-                  </div>
-                </div>
-              </DialogClose>
-            </div>
+            <DialogClose
+              ref={closeButtonRef}
+              onClick={() => {
+                setIsOpenSubMenu(false);
+                smoother?.paused(false);
+              }}
+              asChild
+              className="border-none outline-none"
+            >
+              <button className="flex size-10 items-center justify-center text-white outline-none">
+                <img
+                  src="/assets/icons/close.svg"
+                  alt="Close"
+                  className="h-6 w-6 object-contain brightness-0 invert"
+                />
+              </button>
+            </DialogClose>
           </div>
 
-          <div className="relative flex h-[calc(100vh-64px)] flex-col items-stretch">
-            <div className="scrollbar-hidden relative flex-1 overflow-x-hidden overflow-y-scroll pb-20">
-              <div className="relative w-full space-y-8 py-8">
-                {/* menu main */}
-                <AccordionRoot
-                  className="relative w-full space-y-4"
-                  type="single"
-                  collapsible
-                >
-                  {top_navigation &&
-                    top_navigation?.map((item: any, index: any) => {
-                      const hasSubItems = item?.sub_items?.length > 0;
+          <div className="relative px-[30px]">
+            <div className="absolute left-10 top-1/2 -translate-y-1/2 text-white">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="h-5 w-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                />
+              </svg>
+            </div>
+            <input
+              type="text"
+              placeholder="Tìm kiếm..."
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleSearch('search', searchText);
+              }}
+              className="w-full rounded-full border border-white/50 bg-transparent py-2.5 pl-10 pr-4 text-base text-white placeholder:text-white/80 focus:border-white focus:outline-none"
+            />
+          </div>
 
-                      return (
-                        <div key={index} className="px-1">
-                          {hasSubItems ? (
-                            <AccordionItem
-                              value={`item-${index}`}
-                              className="border-none"
+          <div className="relative w-full flex-1 overflow-y-auto overflow-x-hidden px-[30px] pb-4">
+            <AccordionRoot
+              className="w-full"
+              type="multiple"
+              defaultValue={['item-1', 'item-3']}
+            >
+              {DUMMY_NAVIGATION.map((item: any, index: any) => {
+                const hasSubItems = item?.sub_items?.length > 0;
+
+                return (
+                  <div
+                    key={index}
+                    className="border-b border-white/30 last:border-none"
+                  >
+                    {hasSubItems ? (
+                      <AccordionItem
+                        value={`item-${index}`}
+                        className="border-none"
+                      >
+                        <AccordionTrigger className="group flex w-full items-center justify-between border-b border-white/30 py-4 text-base font-medium uppercase tracking-wider text-white transition-opacity last:border-none hover:opacity-80">
+                          {item?.title}
+                          <div className="relative transition-transform duration-200 group-data-[state=open]:rotate-180">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="2.5"
+                              stroke="currentColor"
+                              className="h-4 w-4 text-white"
                             >
-                              <AccordionTrigger className="flex w-full items-center justify-between py-4 text-sm font-bold uppercase tracking-wider text-gray-900 transition-colors hover:text-primary-600">
-                                {item?.title}
-                                <div className="relative size-5 transition-transform duration-200 group-data-[state=open]:rotate-180">
-                                  <NextImg
-                                    src="/assets/icons/arrow_down_black.svg"
-                                    alt="arrow"
-                                  />
-                                </div>
-                              </AccordionTrigger>
-                              <AccordionContent>
-                                <div className="flex flex-col gap-4 pl-4 pt-2">
-                                  {item?.sub_items?.map(
-                                    (sub: any, sIdx: number) => (
-                                      <DialogClose
-                                        key={sIdx}
-                                        onClick={() => smoother?.paused(false)}
-                                        asChild
-                                      >
-                                        <CustomLink
-                                          href={sub?.url}
-                                          className="py-2 text-sm font-medium text-gray-500 hover:text-primary-600"
-                                        >
-                                          {sub?.title}
-                                        </CustomLink>
-                                      </DialogClose>
-                                    ),
-                                  )}
-                                </div>
-                              </AccordionContent>
-                            </AccordionItem>
-                          ) : (
-                            <DialogClose
-                              onClick={() => smoother?.paused(false)}
-                              asChild
-                            >
-                              <CustomLink
-                                href={item?.url || ''}
-                                className="block py-4 text-sm font-bold uppercase tracking-wider text-gray-900 transition-colors hover:text-primary-600"
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                              />
+                            </svg>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="flex flex-col">
+                            {item?.sub_items?.map((sub: any, sIdx: number) => (
+                              <DialogClose
+                                key={sIdx}
+                                onClick={() => smoother?.paused(false)}
+                                asChild
                               >
-                                {item?.title}
-                              </CustomLink>
-                            </DialogClose>
-                          )}
-                        </div>
-                      );
-                    })}
-                </AccordionRoot>
+                                <CustomLink
+                                  href={sub?.url}
+                                  className={`py-3 pl-8 pr-4 text-base font-medium uppercase tracking-wider text-white hover:opacity-80 ${sIdx !== item.sub_items.length - 1 ? 'border-b border-white/20' : ''}`}
+                                >
+                                  {sub?.title}
+                                </CustomLink>
+                              </DialogClose>
+                            ))}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ) : (
+                      <DialogClose
+                        onClick={() => smoother?.paused(false)}
+                        asChild
+                      >
+                        <CustomLink
+                          href={item?.url || ''}
+                          className="block py-4 text-base font-medium uppercase tracking-wider text-white transition-opacity hover:opacity-80"
+                        >
+                          {item?.title}
+                        </CustomLink>
+                      </DialogClose>
+                    )}
+                  </div>
+                );
+              })}
+            </AccordionRoot>
+
+            <div className="mt-16 flex flex-col items-center">
+              <p className="mb-6 text-base font-medium uppercase tracking-wider text-white">
+                Theo dõi chúng tôi trên
+              </p>
+              <div className="flex items-center gap-6">
+                <Link
+                  href="#"
+                  className="text-white transition-opacity hover:opacity-80"
+                >
+                  <img
+                    src="/assets/icons/facebook.svg"
+                    alt="Facebook"
+                    className="size-6"
+                  />
+                </Link>
+                <Link
+                  href="#"
+                  className="text-white transition-opacity hover:opacity-80"
+                >
+                  <img
+                    src="/assets/icons/youtube.svg"
+                    alt="Youtube"
+                    className="size-6"
+                  />
+                </Link>
+                <Link
+                  href="#"
+                  className="text-white transition-opacity hover:opacity-80"
+                >
+                  <img
+                    src="/assets/icons/messenger.svg"
+                    alt="Messenger"
+                    className="size-6"
+                  />
+                </Link>
               </div>
             </div>
           </div>

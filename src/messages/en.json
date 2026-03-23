@@ -1,7 +1,7 @@
 {
   "Metadata": {
     "generic": {
-      "title": "{name} | Ramond Urbaniz"
+      "title": "{name} | Light Housing"
     }
   },
   "Common": {
@@ -104,7 +104,7 @@
     "social-network-label": "Social networks",
     "policy-label": "Privacy Policy",
     "terms-services-label": "Terms & Services",
-    "copy-right-label": "Copyright © {year} Ramond Urbaniz. All rights reserved."
+    "copy-right-label": "Copyright © {year} Light Housing. All rights reserved."
   },
   "Format": {
     "date": "MMMM D, YYYY"

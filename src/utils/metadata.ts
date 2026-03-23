@@ -2,7 +2,11 @@ import { checkValueNull } from '@/src/utils/validate';
 import { Locale } from 'next-intl';
 import { routing } from '../i18n/routing';
 
-export const createSeoData = (seo: any, locale: Locale = routing.defaultLocale, slug?: string) => {
+export const createSeoData = (
+  seo: any,
+  locale: Locale = routing.defaultLocale,
+  slug?: string,
+) => {
   const siteUrl = process.env.SITE_URL;
 
   const canonical = slug
@@ -13,7 +17,7 @@ export const createSeoData = (seo: any, locale: Locale = routing.defaultLocale, 
     routing.locales.map((lang) => [
       lang,
       slug ? `${siteUrl}/${lang}/${slug}` : `${siteUrl}/${lang}`,
-    ])
+    ]),
   );
 
   return {
@@ -50,14 +54,13 @@ export function cleanTranslationsDeep(data: any, locale: string): any {
       .filter(Boolean);
   }
 
-  if (data && typeof data === "object") {
+  if (data && typeof data === 'object') {
     const cleaned = { ...data };
 
     if (Array.isArray(cleaned.translations)) {
       const matched = cleaned.translations.find(
         (t: any) =>
-          t?.languages_code?.code === locale ||
-          t?.languages_code === locale
+          t?.languages_code?.code === locale || t?.languages_code === locale,
       );
 
       // ❌ Nếu KHÔNG có bản dịch phù hợp → loại bỏ hoàn toàn object này
@@ -74,7 +77,7 @@ export function cleanTranslationsDeep(data: any, locale: string): any {
 
     // Đệ quy xử lý các trường con
     for (const key of Object.keys(cleaned)) {
-      if (typeof cleaned[key] === "object") {
+      if (typeof cleaned[key] === 'object') {
         cleaned[key] = cleanTranslationsDeep(cleaned[key], locale);
       }
     }
@@ -84,6 +87,3 @@ export function cleanTranslationsDeep(data: any, locale: string): any {
 
   return data;
 }
-
-
-

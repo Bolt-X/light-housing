@@ -7,6 +7,7 @@ import { Metadata, ResolvingMetadata } from 'next';
 import { Locale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { PROJECT_CONSTANTS } from '@/src/constants/project';
+import StaticHome from '@/src/components/sections/static/StaticHome';
 
 export const revalidate = 300;
 
@@ -40,8 +41,9 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
-      <JsonLDProvider pageSchema={pageSchema} />
-      <PageBuilder pageContent={pageContent} />
+      {/* <JsonLDProvider pageSchema={pageSchema} />
+      <PageBuilder pageContent={pageContent} /> */}
+      <StaticHome />
     </>
   );
 }

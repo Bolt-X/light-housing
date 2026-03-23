@@ -1,5 +1,5 @@
-import React from 'react'
-import * as Accordion from '@radix-ui/react-accordion'
+import React from 'react';
+import * as Accordion from '@radix-ui/react-accordion';
 import { cn } from '@/src/lib/utils';
 
 const AccordionRoot = Accordion.Root;
@@ -9,17 +9,17 @@ const AccordionItem = React.forwardRef(
     <Accordion.Item
       className={cn(
         'mt-px overflow-hidden first:mt-0 focus-within:relative focus-within:z-10',
-        className
+        className,
       )}
       {...props}
       ref={forwardedRef}
     >
       {children}
     </Accordion.Item>
-  )
-)
+  ),
+);
 
-AccordionItem.displayName = "AccordionItem"
+AccordionItem.displayName = 'AccordionItem';
 
 const AccordionTrigger = React.forwardRef(
   ({ children, className, ...props }: any, forwardedRef) => (
@@ -32,26 +32,26 @@ const AccordionTrigger = React.forwardRef(
         {children}
       </Accordion.Trigger>
     </Accordion.Header>
-  )
-)
+  ),
+);
 
-AccordionTrigger.displayName = "AccordionTrigger"
+AccordionTrigger.displayName = 'AccordionTrigger';
 
 const AccordionContent = React.forwardRef(
   ({ children, className, ...props }: any, forwardedRef) => (
     <Accordion.Content
       className={cn(
         'overflow-hidden data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown',
-        className
+        className,
       )}
       {...props}
       ref={forwardedRef}
     >
       <div className="">{children}</div>
     </Accordion.Content>
-  )
-)
+  ),
+);
 
-AccordionContent.displayName = "AccordionContent"
+AccordionContent.displayName = 'AccordionContent';
 
-export { AccordionItem, AccordionTrigger, AccordionContent,AccordionRoot }
+export { AccordionItem, AccordionTrigger, AccordionContent, AccordionRoot };
