@@ -21,11 +21,11 @@ const config = {
     container: {
       center: true,
       padding: {
-        DEFAULT: '24px',
+        DEFAULT: '16px',
         '4xl': '80px',
         '3xl': '80px',
         '2xl': '40px',
-        xl: '40px',
+        xl: '60px',
         lg: '32px',
         md: '32px',
       },

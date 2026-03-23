@@ -31,46 +31,42 @@ const newsItems = [
 
 export const PropertyHighlightsSection = (): React.ReactNode => {
   return (
-    <div className="relative flex w-full flex-col items-center gap-10 bg-white/5 p-6 py-16 md:gap-[60px] md:p-20">
+    <div className="container relative flex w-full flex-col items-center gap-6 bg-white/5 py-10 xl:gap-[60px] xl:py-16">
       <img
-        className="pointer-events-none absolute right-0 top-0 h-full w-full select-none object-cover opacity-30"
-        alt="Bg pattern"
-        src="https://c.animaapp.com/Bhe9g9ou/img/bg-pattern-2.svg"
+        className="pointer-events-none absolute right-0 top-0 h-full w-full select-none object-cover opacity-60"
+        alt="Bg pattern 2"
+        src="/assets/bgs/bg-pattern-2.png"
       />
 
       <div className="relative z-10 flex w-full flex-col items-center gap-3">
-        <div className="text-xs font-semibold uppercase tracking-wider text-gray-500 md:text-sm">
+        <div className="section-subtitle !text-[#2F3037]">
           TIN TỨC THỊ TRƯỜNG
         </div>
 
-        <p className="max-w-2xl text-center text-xl font-bold leading-tight text-brand md:text-3xl lg:text-4xl">
+        <p className="section-title text-brand-dark text-center">
           Thông tin mới nhất về thị trường bất động sản
         </p>
       </div>
 
-      <div className="relative z-10 grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-10">
+      <div className="relative z-10 grid w-full grid-cols-2 gap-4 md:grid-cols-4 lg:gap-6 xl:gap-10">
         {newsItems.map((item, index) => (
           <div
             key={index}
             className="group flex flex-col gap-4 overflow-hidden"
           >
-            <div
-              className="relative h-[240px] w-full overflow-hidden rounded-2xl bg-cover bg-center transition-transform group-hover:scale-105"
-              style={{ backgroundImage: `url(${item.image})` }}
+            <img
+              src={item.image}
+              alt={item.title}
+              className="aspect-[3/2] w-full overflow-hidden rounded-md bg-cover bg-center transition-transform group-hover:scale-105"
             />
-
             <div className="flex flex-col gap-3">
               <div className="flex gap-2">
-                <div className="rounded-md bg-brand-light/20 px-3 py-1 text-[10px] font-bold text-brand uppercase">
+                <div className="bg-brand-50 rounded-[4px] px-2 py-1 text-xs font-medium text-white">
                   {item.category}
-                </div>
-                {/* dummy tag for design parity */}
-                <div className="rounded-md bg-brand-dark px-3 py-1 text-[10px] font-bold text-white uppercase">
-                  Huế
                 </div>
               </div>
 
-              <h4 className="line-clamp-2 text-lg font-bold text-gray-900 group-hover:text-brand transition-colors">
+              <h4 className="group-hover:text-brand line-clamp-2 text-base font-bold text-[#2F3037] transition-colors lg:text-lg">
                 {item.title}
               </h4>
 
@@ -82,10 +78,8 @@ export const PropertyHighlightsSection = (): React.ReactNode => {
         ))}
       </div>
 
-      <button className="z-10 inline-flex items-center justify-center gap-2 rounded-lg border-2 border-brand px-10 py-3 transition-colors hover:bg-brand hover:text-white">
-        <span className="text-xs font-bold text-brand group-hover:text-white">
-          XEM THÊM TIN TỨC
-        </span>
+      <button className="border-brand-dark text-brand-dark hover:bg-brand-dark z-10 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-4 py-3 text-sm font-semibold transition-colors hover:text-white xl:px-7 xl:py-3 xl:text-base">
+        XEM THÊM TIN TỨC
       </button>
     </div>
   );

@@ -2,26 +2,24 @@ export const IntroductionSection = (): React.ReactNode => {
   return (
     <div className="flex w-full flex-col md:flex-row">
       {/* Left content */}
-      <div className="relative flex flex-1 flex-col justify-center gap-6 p-6 md:h-[700px] md:gap-10 md:p-20">
+      <div className="container relative flex flex-1 flex-col justify-center gap-6 py-10 md:w-1/2 md:flex-1">
         {/* Background pattern */}
         <img
-          src="https://c.animaapp.com/Bhe9g9ou/img/bg-pattern.svg"
+          src="/assets/bgs/bg-pattern.png"
           alt="bg pattern"
-          className="absolute inset-0 h-full w-full object-cover opacity-50 md:opacity-100"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-100"
         />
 
-        <div className="relative z-10 flex flex-col gap-2 md:gap-4">
-          <span className="text-xs font-semibold uppercase tracking-wider text-gray-500 md:text-sm">
-            VỀ CHÚNG TÔI
-          </span>
+        <div className="relative z-10 flex flex-col gap-2 bg-transparent xl:gap-4">
+          <span className="section-subtitle">VỀ CHÚNG TÔI</span>
 
-          <h2 className="text-brand text-2xl font-bold leading-tight md:text-3xl lg:text-4xl">
+          <h2 className="section-title text-brand-dark">
             Kiến tạo những dự án nhà ở quốc dân, giúp việc sở hữu nhà trở nên dễ
             dàng và thực tế hơn với mọi người.
           </h2>
         </div>
 
-        <p className="relative z-10 text-sm leading-relaxed text-gray-600 md:max-w-[800px] md:text-base">
+        <p className="relative z-10 line-clamp-4 text-sm leading-relaxed text-[#5F5F74] md:max-w-[800px] xl:text-base">
           Chúng tôi hướng đến việc mang lại những giải pháp nhà ở phù hợp với
           khả năng tài chính của người trẻ và các gia đình hiện đại. Thấu hiểu
           rằng hành trình sở hữu ngôi nhà đầu tiên luôn đi kèm nhiều áp lực về
@@ -34,11 +32,10 @@ export const IntroductionSection = (): React.ReactNode => {
       </div>
 
       {/* Right image */}
-      <div
-        className="h-[300px] flex-1 bg-cover bg-center md:h-[700px]"
-        style={{
-          backgroundImage: 'url(https://c.animaapp.com/Bhe9g9ou/img/image.png)',
-        }}
+      <img
+        src="/assets/images/introduction_image.png"
+        alt="image"
+        className="max-h-[280px] w-full flex-1 object-cover md:h-[280px] md:max-h-none md:w-1/2 md:flex-1 lg:h-[400px] xl:h-[460px]"
       />
     </div>
   );

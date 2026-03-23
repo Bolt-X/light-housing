@@ -1,24 +1,31 @@
 'use client';
-import { useState } from 'react';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
 
 const slides = [
   {
     id: 0,
-    bg: 'https://c.animaapp.com/Bhe9g9ou/img/banner.png',
+    bg: '/assets/images/home_banner_slide_1.jpg',
     title: 'An cư bền vững – Khởi sinh giá trị sống',
     description:
       'Những dự án bất động sản giá hợp lý, pháp lý minh bạch và chính sách linh hoạt giúp bạn sở hữu ngôi nhà đầu tiên sớm hơn bạn nghĩ.',
   },
   {
     id: 1,
-    bg: 'https://c.animaapp.com/Bhe9g9ou/img/banner.png',
+    bg: '/assets/images/home_banner_slide_1.jpg',
     title: 'Kiến tạo cộng đồng đa tiện ích',
     description:
       'Tận hưởng phong cách sống hiện đại với chuỗi tiện ích đẳng cấp ngay thềm nhà: công viên sinh thái, hồ điều hòa và trung tâm thương mại sầm uất.',
   },
   {
     id: 2,
-    bg: 'https://c.animaapp.com/Bhe9g9ou/img/banner.png',
+    bg: '/assets/images/home_banner_slide_1.jpg',
     title: 'Chuẩn mực không gian sống xanh',
     description:
       'Định hình tương lai an cư mới với phong cách thiết kế mở, mang lại sự bình yên và thư thái trọn vẹn giữa nhịp sống năng động của đô thị.',
@@ -26,84 +33,103 @@ const slides = [
 ];
 
 export const HeroBannerSection = (): React.ReactNode => {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-  };
-
-  const currentSlide = slides[activeIndex];
-
   return (
-    <div
-      className="relative h-[560px] w-full bg-cover bg-center md:h-[700px]"
-      style={{
-        backgroundImage: `url(${currentSlide.bg})`,
-      }}
-    >
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-black/50" />
+    <div className="group relative h-[500px] w-full 2xl:h-[600px] 4xl:h-[700px]">
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        effect="fade"
+        speed={1500}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        loop={true}
+        navigation={{
+          prevEl: '.swiper-button-prev-custom',
+          nextEl: '.swiper-button-next-custom',
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        className="h-full w-full"
+      >
+        {slides.map((slide) => (
+          <SwiperSlide key={slide.id}>
+            <div
+              className="relative flex h-full w-full items-center justify-center bg-cover bg-center"
+              style={{ backgroundImage: `url(${slide.bg})` }}
+            >
+              <div className="absolute inset-0 bg-black/50" />
 
-      {/* Controls + Content */}
-      <div className="absolute top-1/2 flex w-full -translate-y-1/2 items-center justify-between px-6 md:px-8">
-        {/* Prev */}
-        <button
-          onClick={handlePrev}
-          aria-label="Previous slide"
-          className="hidden rounded-full border p-3 opacity-50 md:flex"
-        >
-          <img
-            className="h-6 w-6"
-            alt="prev"
-            src="https://c.animaapp.com/Bhe9g9ou/img/outline---arrows---alt-arrow-left.svg"
-          />
-        </button>
-
-        {/* Content */}
-        <div className="mx-auto flex max-w-4xl flex-col items-center gap-4 text-center text-white md:gap-6">
-          <h1 className="text-2xl font-bold leading-tight md:text-5xl">
-            {currentSlide.title}
-          </h1>
-
-          <p className="max-w-[340px] text-sm md:max-w-none md:text-lg">
-            {currentSlide.description}
-          </p>
-
-          <button className="rounded-full border border-white px-6 py-3 text-sm font-semibold transition-colors hover:bg-white hover:text-black md:px-8 md:py-4 md:text-base">
-            Nhận tư vấn ngay
-          </button>
-        </div>
-
-        {/* Next */}
-        <button
-          onClick={handleNext}
-          aria-label="Next slide"
-          className="hidden rounded-full border p-3 opacity-50 md:flex"
-        >
-          <img
-            className="h-6 w-6"
-            alt="next"
-            src="https://c.animaapp.com/Bhe9g9ou/img/outline---arrows---alt-arrow-right.svg"
-          />
-        </button>
-      </div>
-
-      {/* Dots */}
-      <div className="absolute bottom-10 left-1/2 flex -translate-x-1/2 gap-3">
-        {slides.map((slide, index) => (
-          <button
-            key={slide.id}
-            onClick={() => setActiveIndex(index)}
-            className={`h-2.5 w-2.5 rounded-full transition-all ${
-              index === activeIndex ? 'w-8 bg-white' : 'bg-white/40'
-            }`}
-          />
+              <div className="relative z-10 mx-auto flex max-w-[468px] flex-col items-center gap-4 px-6 text-center text-white md:px-0 xl:max-w-[600px]">
+                <h1 className="text-lg font-bold leading-tight md:text-[26px] xl:text-[30px] 2xl:text-2xl 4xl:text-5xl">
+                  {slide.title}
+                </h1>
+                <p className="max-w-[340px] text-xs text-white/80 md:max-w-none md:text-sm 2xl:text-base">
+                  {slide.description}
+                </p>
+                <button className="hover:text-brand-dark mt-4 rounded-full border border-white px-4 py-2 text-sm font-semibold transition-colors hover:bg-white lg:px-6 lg:py-3 xl:text-base">
+                  Nhận tư vấn ngay
+                </button>
+              </div>
+            </div>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
+
+      {/* Custom Navigation */}
+      <button className="swiper-button-prev-custom absolute left-6 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-white/50 p-2 text-white transition-colors hover:bg-white/20 md:flex">
+        <img
+          className="h-5 w-5 brightness-0 invert"
+          alt="prev"
+          src="/assets/icons/arrow_left.svg"
+        />
+      </button>
+      <button className="swiper-button-next-custom absolute right-6 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-white/50 p-2 text-white transition-colors hover:bg-white/20 md:flex">
+        <img
+          className="h-5 w-5 brightness-0 invert"
+          alt="next"
+          src="/assets/icons/arrow_right.svg"
+        />
+      </button>
+
+      {/* Inject Swiper Bullet CSS styles directly */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+          .swiper-pagination {
+            position: absolute;
+            bottom: 40px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            z-index: 10;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            width: auto !important;
+          }
+          .swiper-pagination-bullet {
+            width: 8px !important;
+            height: 8px !important;
+            background-color: rgba(255, 255, 255, 0.4) !important;
+            border-radius: 9999px !important;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 0 !important;
+            opacity: 1 !important;
+          }
+          @media (min-width: 1024px) {
+            .swiper-pagination-bullet {
+              width: 10px !important;
+              height: 10px !important;
+            }
+          }
+          .swiper-pagination-bullet-active {
+            width: 32px !important;
+            background-color: #ffffff !important;
+          }
+        `,
+        }}
+      />
     </div>
   );
 };
