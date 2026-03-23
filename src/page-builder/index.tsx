@@ -1,0 +1,240 @@
+import dynamic from 'next/dynamic';
+import {
+  CommonSection,
+  PageContent,
+  SectionMap,
+} from '@/src/types/pageBuilder';
+import { notFound } from 'next/navigation';
+
+const sectionMap: SectionMap = {
+  // Home
+  'hero-with-top-big-image': dynamic(() =>
+    import('../components/sections/hero').then((m) => m.HeroWithTopImage),
+  ),
+  'feature-with-image-4-col': dynamic(() =>
+    import('../components/sections/feature').then(
+      (m) => m.FeatureWithImage4Col,
+    ),
+  ),
+  'team-slider-5-col': dynamic(() =>
+    import('../components/sections/team').then((m) => m.TeamSlider5Col),
+  ),
+  'logo-slider': dynamic(() =>
+    import('../components/sections/slider').then((m) => m.LogoSlider),
+  ),
+  'posts-3-col': dynamic(() =>
+    import('../components/sections/post-grid').then((m) => m.Posts3Col),
+  ),
+  'feature-4-col': dynamic(() =>
+    import('../components/sections/feature').then((m) => m.Feature4Col),
+  ),
+  'number-none': dynamic(() =>
+    import('../components/sections/number').then((m) => m.NumberNone),
+  ),
+  'number-grid': dynamic(() =>
+    import('../components/sections/number').then((m) => m.NumberGrid),
+  ),
+  'gallery-with-text': dynamic(() =>
+    import('../components/sections/gallery').then((m) => m.GalleryWithText),
+  ),
+  'review-split-with-text': dynamic(() =>
+    import('../components/sections/review').then((m) => m.ReviewSplitWithText),
+  ),
+
+  // About us
+  'hero-background-focus-2': dynamic(() =>
+    import('../components/sections/hero').then((m) => m.HeroBackgroundFocus2),
+  ),
+  'info-basic': dynamic(() =>
+    import('../components/sections/information').then((m) => m.InfoBasic),
+  ),
+  'card-2-col': dynamic(() =>
+    import('../components/sections/card').then((m) => m.Card2Col),
+  ),
+  'card-slider': dynamic(() =>
+    import('../components/sections/card').then((m) => m.CardSlider),
+  ),
+  'info-split-with-features-image': dynamic(() =>
+    import('../components/sections/information').then(
+      (m) => m.InfoWithFeaturesImage,
+    ),
+  ),
+  'info-center-block': dynamic(() =>
+    import('../components/sections/information').then((m) => m.InfoCenterBlock),
+  ),
+  'info-basic-r': dynamic(() =>
+    import('../components/sections/information').then((m) => m.InfoBasicR),
+  ),
+  'team-4-col': dynamic(() =>
+    import('../components/sections/team').then((m) => m.Team4Col),
+  ),
+  'card-slider-with-l-r-button': dynamic(() =>
+    import('../components/sections/card').then(
+      (m) => m.CardSliderWithLeftRightButton,
+    ),
+  ),
+
+  'card-slider-with-blurb': dynamic(() =>
+    import('../components/sections/card').then((m) => m.CardSliderWithBlurb),
+  ),
+  'team-grid': dynamic(() =>
+    import('../components/sections/team').then((m) => m.TeamGrid),
+  ),
+  'gallery-alternate': dynamic(() =>
+    import('../components/sections/gallery').then((m) => m.GalleryAlternate),
+  ),
+  'team-3-col': dynamic(() =>
+    import('../components/sections/team').then((m) => m.Team3Col),
+  ),
+
+  // detail
+  'breadcrumb-basic': dynamic(() =>
+    import('../components/sections/breadcrumb').then((m) => m.BreadcrumbBasic),
+  ),
+
+  'posts-slider': dynamic(() =>
+    import('../components/sections/post-grid').then((m) => m.RelatedPost),
+  ),
+
+  'sidebar-right-basic': dynamic(() =>
+    import('../components/sections/custom').then((m) => m.SideBarRightBasic),
+  ),
+
+  // detail
+  'hero-with-bottom-big-image': dynamic(() =>
+    import('../components/sections/hero').then((m) => m.HeroWithBottomBigImage),
+  ),
+  'info-with-left-image-top-title': dynamic(() =>
+    import('../components/sections/information').then(
+      (m) => m.InfoWithLeftImageTopTitle,
+    ),
+  ),
+  'info-with-right-image-top-title': dynamic(() =>
+    import('../components/sections/information').then(
+      (m) => m.InfoWithRightImageTopTitle,
+    ),
+  ),
+  'team-slider-4-col': dynamic(() =>
+    import('../components/sections/team').then((m) => m.TeamSlider4Col),
+  ),
+  'card-2-col-with-blurb': dynamic(() =>
+    import('../components/sections/card').then((m) => m.Card2ColWithBlurb),
+  ),
+  'number-with-text': dynamic(() =>
+    import('../components/sections/number').then((m) => m.NumberWithText),
+  ),
+  'number-split': dynamic(() =>
+    import('../components/sections/number').then((m) => m.NumberSplit),
+  ),
+  'info-with-right-image': dynamic(() =>
+    import('../components/sections/information').then(
+      (m) => m.InfoWithRightImage,
+    ),
+  ),
+  'info-with-left-image': dynamic(() =>
+    import('../components/sections/information').then(
+      (m) => m.InfoWithLeftImage,
+    ),
+  ),
+  'cta-basic': dynamic(() =>
+    import('../components/sections/cta').then((m) => m.CtaBasic),
+  ),
+
+  'hero-background-focus': dynamic(() =>
+    import('../components/sections/hero').then((m) => m.HeroBackgroundsFocus),
+  ),
+
+  // Milestone
+  'card-1-col': dynamic(() =>
+    import('../components/sections/card').then((m) => m.Card1Col),
+  ),
+
+  'card-4-col': dynamic(() =>
+    import('../components/sections/card').then((m) => m.Card4Col),
+  ),
+
+  'gallery-slider-tall': dynamic(() =>
+    import('../components/sections/gallery').then((m) => m.GallerySliderTall),
+  ),
+
+  // Search
+  custom: dynamic(() =>
+    import('../components/sections/custom').then((m) => m.CustomSearch),
+  ),
+
+  // PDF view
+  'pdf-viewer': dynamic(() =>
+    import('../components/sections/custom').then((m) => m.PDFViewer),
+  ),
+
+  'fancybox-viewer': dynamic(() =>
+    import('../components/sections/custom').then((m) => m.FancyboxViewer),
+  ),
+
+  'posts-2-col': dynamic(() =>
+    import('../components/sections/post-grid').then((m) => m.Posts2Col),
+  ),
+
+  // Contact
+  'cta-background-image': dynamic(() =>
+    import('../components/sections/cta').then((m) => m.CtaBackgroundImage),
+  ),
+  'card-3-col': dynamic(() =>
+    import('../components/sections/card').then((m) => m.Card3Col),
+  ),
+  'cta-with-field': dynamic(() =>
+    import('../components/sections/cta').then((m) => m.CtaWithField),
+  ),
+  'embedded-map': dynamic(() =>
+    import('../components/sections/custom').then((m) => m.EmbeddedMap),
+  ),
+
+  'hero-text-overlay': dynamic(() =>
+    import('../components/sections/hero').then((m) => m.HeroTextOverlay),
+  ),
+
+  'team-2-col': dynamic(() =>
+    import('../components/sections/team').then((m) => m.Team2Col),
+  ),
+
+  'custom-full-size': dynamic(() =>
+    import('../components/sections/custom').then((m) => m.ContentFullSize),
+  ),
+};
+
+type PageBuilderProps = {
+  pageContent: PageContent;
+  pageDetail?: any;
+};
+
+const PageBuilder = ({ pageContent, pageDetail }: PageBuilderProps) => {
+  if (
+    !pageContent ||
+    !pageContent?.sections ||
+    pageContent.sections.length === 0
+  ) {
+    notFound();
+  }
+  const sections = pageContent.sections;
+
+  return (
+    <>
+      <main className="padding-top-body">
+        {sections.map((section: CommonSection, index: number) => {
+          const SectionComp = sectionMap[section.type];
+          if (!SectionComp) return null;
+
+          return (
+            <SectionComp
+              key={'section_' + index}
+              data={section}
+              {...(pageDetail ? { dataDetail: pageDetail } : {})}
+            />
+          );
+        })}
+      </main>
+    </>
+  );
+};
+
+export default PageBuilder;

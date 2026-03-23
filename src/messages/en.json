@@ -1,0 +1,112 @@
+{
+  "Metadata": {
+    "generic": {
+      "title": "{name} | Ramond Urbaniz"
+    }
+  },
+  "Common": {
+    "return-home": "Back to home page",
+    "close": "Close",
+    "submit": "Submit",
+    "view-more": "View more",
+    "view-detail": "View detail",
+    "no-data": "No data available!",
+    "empty-page": "This page does not exist!",
+    "return-main-menu": "Back to main menu",
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "all": "All",
+    "search-results": "Search results",
+    "send-now": "Send now",
+    "click-image": "Click on the image to see it more clearly",
+    "documents": "Attached documents",
+    "download": "Download document"
+  },
+  "Href": {
+    "achievements": "/achievements",
+    "search": "/search"
+  },
+  "Contact": {
+    "title": "Contact",
+    "hotline": "Hotline: {hotline}",
+    "hot-line-label": "Hotline",
+    "fanpage": "Fanpage",
+    "email": "Email",
+    "email-btn": "Email: {email}",
+    "phone": "Phone",
+    "address": "Address",
+    "social": "Social media"
+  },
+  "Team": {
+    "bio": "Bio",
+    "position": "Position",
+    "education": "Education & Experience",
+    "updating": "Updating"
+  },
+  "Validate": {
+    "email": {
+      "required": "Please enter your email!",
+      "length": "Please enter no more than 50 characters!",
+      "invalid": "Please enter a valid email address!",
+      "placeholder": "Email"
+    },
+    "name": {
+      "required": "Please enter your name!",
+      "length": "Please enter no more than 50 characters!",
+      "invalid": "Please enter a valid name!",
+      "placeholder": "Full name"
+    },
+    "phone": {
+      "required": "Please enter your phone number!",
+      "length": "Please enter no more than 20 characters!",
+      "invalid": "Please enter a valid phone number!",
+      "placeholder": "Phone number"
+    },
+    "message": {
+      "required": "Please enter your message!",
+      "length": "Please enter no more than 1000 characters!",
+      "invalid": "Please enter a valid message!",
+      "placeholder": "Note"
+    },
+    "rating": {
+      "required": "Please select your rating!"
+    },
+    "search": {
+      "placeholder": "Search"
+    }
+  },
+  "Rating": {
+    "very-good": "😍 Excellent",
+    "good": "😊 Good",
+    "rather": "🙂 Rather",
+    "medium": "😐 medium",
+    "least": "😞 Least"
+  },
+  "Notification": {
+    "success": {
+      "contact": "Thank you for contacting us!",
+      "review": "Thank you for your feedback!",
+      "footer-register": "Thank you for providing your information!"
+    },
+    "error": {
+      "contact": "An error occurred, please try again!",
+      "review": "An error occurred, please try again!",
+      "footer-register": "An error occurred, please try again!",
+      "verify-recapcha": "reCaptcha verification failed!",
+      "recapcha-not-ready": "reCaptcha is not ready, please try again later!"
+    }
+  },
+  "Footer": {
+    "register-form-title": "Stay updated with our latest news and services",
+    "register-form-des": "Subscribe to receive the latest updates via your email",
+    "register-label": "Subscribe",
+    "register-placeholder": "Email address",
+    "social-network-label": "Social networks",
+    "policy-label": "Privacy Policy",
+    "terms-services-label": "Terms & Services",
+    "copy-right-label": "Copyright © {year} Ramond Urbaniz. All rights reserved."
+  },
+  "Format": {
+    "date": "MMMM D, YYYY"
+  }
+}
