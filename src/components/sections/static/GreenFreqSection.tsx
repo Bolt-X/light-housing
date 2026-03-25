@@ -52,28 +52,28 @@ const features = [
     title: 'Dải tần Xanh Kiến trúc',
     description:
       'Tần số xanh bắt đầu từ không gian sống. Light Housing tối ưu layout, tận dụng ánh sáng và thông gió tự nhiên, nâng cao hiệu quả sử dụng và tiết kiệm năng lượng.',
-    image: '/assets/images/feature_1.png',
+    image: '/assets/images/step_1.svg',
   },
   {
     id: 2,
     title: 'Dải tần Xanh Trải nghiệm',
     description:
       'Hệ tiện ích được lựa chọn có chủ đích, tập trung vào nhu cầu thiết yếu hằng ngày. Không gian cộng đồng, khu vui chơi và mảng xanh được tổ chức như những "điểm chạm" giúp cư dân kết nối, thư giãn và tái tạo năng lượng.',
-    image: '/assets/images/feature_2.png',
+    image: '/assets/images/step_2.svg',
   },
   {
     id: 3,
     title: 'Dải tần Xanh Vận hành',
     description:
       'Tần số xanh được duy trì qua hệ vận hành thông minh, tối ưu và tiết kiệm. Số hóa quản lý giúp tinh gọn quy trình, giảm chi phí và hạn chế lãng phí, đồng thời hướng đến một đời sống ổn định, hiệu quả và bền vững.',
-    image: '/assets/images/feature_3.png',
+    image: '/assets/images/step_3.svg',
   },
   {
     id: 4,
     title: 'Dải tần Xanh Đồng hành',
     description:
       '"Tần số xanh" không chỉ trong không gian sống mà còn trong hành trình sở hữu. Pháp lý minh bạch, quy trình rõ ràng và tài chính linh hoạt giúp việc an cư trở nên nhẹ nhàng, bền vững hơn.',
-    image: '/assets/images/feature_4.png',
+    image: '/assets/images/step_4.svg',
   },
 ];
 
@@ -239,18 +239,18 @@ function CircleCard({ item, small }: { item: Feature; small?: boolean }) {
         <HalftoneHalo />
 
         {/* Photo */}
-        <div className="relative h-[84%] w-[84%] overflow-hidden rounded-full border-[3px] border-[#A8CCDF]/35 shadow-2xl transition-all duration-500 group-hover:border-white/60 group-hover:shadow-[0_0_40px_rgba(168,204,223,0.35)]">
+        <div className="relative h-[84%] w-[84%] overflow-hidden rounded-full border-[3px] border-[#A8CCDF]/35 transition-all duration-500 group-hover:border-white/60">
           <img
             src={item.image}
             alt={item.title}
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/20 to-transparent" />
         </div>
       </div>
 
       {/* Text block */}
-      <div className="flex max-w-[260px] flex-col gap-2 px-2 lg:max-w-[280px]">
+      <div className="flex max-w-[260px] flex-col gap-2 px-2 lg:max-w-[280px] 2xl:max-w-[360px]">
         <h3 className={`font-bold text-white ${textTitle}`}>{item.title}</h3>
         <div className="bg-brand-primary/50 mx-auto h-[2px] w-8" />
         <p className={`leading-relaxed text-[#A8CCDF]/80 ${textDesc}`}>
