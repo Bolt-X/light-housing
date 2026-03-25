@@ -159,31 +159,24 @@ export default async function RootLayout({
       className={`${svnGilroy.variable} font-sans`}
     >
       <head>
-        <link rel="icon" href="/assets/logo/favicon.ico" sizes="any" />
+        {/* SVG favicon — crisp at every resolution, one file */}
+        <link rel="icon" href="/assets/logo/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/assets/logo/favicon.svg" />
+
+        {/* ── Critical asset preloads (above-the-fold) ── */}
         <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/assets/logo/favicon-16x16.png"
-        ></link>
+          rel="preload"
+          href="/assets/logo/logo_primary_light.svg"
+          as="image"
+          type="image/svg+xml"
+        />
         <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/assets/logo/favicon-32x32.png"
-        ></link>
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="192x192"
-          href="/assets/logo/android-chrome-192x192.png"
-        ></link>
-        <link
-          rel="apple-touch-icon"
-          type="image/png"
-          sizes="180x180"
-          href="/assets/logo/apple-touch-icon-180x180.png"
-        ></link>
+          rel="preload"
+          href="/assets/images/home_banner_slide_1.jpg"
+          as="image"
+          type="image/jpeg"
+          fetchPriority="high"
+        />
 
         <link rel="dns-prefetch" href="//www.google.com" />
         <link
@@ -191,11 +184,6 @@ export default async function RootLayout({
           href="//www.google.com"
           crossOrigin="anonymous"
         />
-        <meta
-          name="msapplication-TileImage"
-          content="/assets/logo/logo-icon-270x270.png"
-        ></meta>
-
         <meta name="format-detection" content="telephone=no" />
       </head>
 

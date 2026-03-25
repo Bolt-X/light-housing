@@ -30,7 +30,7 @@ export const PartnerSection = (): React.ReactNode => {
       <div className="flex flex-col items-center gap-2 text-center lg:gap-4">
         <span className="section-subtitle">ĐỐI TÁC CHIẾN LƯỢC</span>
 
-        <h2 className="section-title text-brand-dark text-center">
+        <h2 className="section-title text-center text-brand-dark">
           Chúng tôi hợp tác cùng các đơn vị uy tín trong lĩnh vực tài chính, xây
           dựng
         </h2>
@@ -64,7 +64,7 @@ export const PartnerSection = (): React.ReactNode => {
               <img
                 src={partner.image}
                 alt={partner.name}
-                className="object-contain transition-all duration-300 hover:opacity-100 md:max-w-[140px] xl:max-w-40"
+                className="object-contain transition-all duration-300 hover:opacity-100 md:max-w-[140px] xl:max-w-40 2xl:max-w-[180px] 3xl:max-w-[206px] 4xl:max-w-[260px]"
               />
             </SwiperSlide>
           ))}

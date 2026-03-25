@@ -24,7 +24,7 @@ const config = {
         DEFAULT: '16px',
         '4xl': '80px',
         '3xl': '80px',
-        '2xl': '40px',
+        '2xl': '80px',
         xl: '60px',
         lg: '32px',
         md: '32px',

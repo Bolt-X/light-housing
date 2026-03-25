@@ -7,6 +7,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 const slides = [
   {
@@ -18,29 +21,66 @@ const slides = [
   },
   {
     id: 1,
-    bg: '/assets/images/home_banner_slide_1.jpg',
-    title: 'Kiến tạo cộng đồng đa tiện ích',
+    bg: '/assets/images/home_banner_slide_2.jpg',
+    title: 'An cư bền vững – Khởi sinh giá trị sống',
     description:
-      'Tận hưởng phong cách sống hiện đại với chuỗi tiện ích đẳng cấp ngay thềm nhà: công viên sinh thái, hồ điều hòa và trung tâm thương mại sầm uất.',
+      'Những dự án bất động sản giá hợp lý, pháp lý minh bạch và chính sách linh hoạt giúp bạn sở hữu ngôi nhà đầu tiên sớm hơn bạn nghĩ.',
   },
   {
     id: 2,
-    bg: '/assets/images/home_banner_slide_1.jpg',
-    title: 'Chuẩn mực không gian sống xanh',
+    bg: '/assets/images/home_banner_slide_3.jpg',
+    title: 'An cư bền vững – Khởi sinh giá trị sống',
     description:
-      'Định hình tương lai an cư mới với phong cách thiết kế mở, mang lại sự bình yên và thư thái trọn vẹn giữa nhịp sống năng động của đô thị.',
+      'Những dự án bất động sản giá hợp lý, pháp lý minh bạch và chính sách linh hoạt giúp bạn sở hữu ngôi nhà đầu tiên sớm hơn bạn nghĩ.',
   },
 ];
 
 export const HeroBannerSection = (): React.ReactNode => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className="group relative h-[500px] w-full 2xl:h-[600px] 4xl:h-[700px]">
+    <div
+      ref={containerRef}
+      className="group relative h-[500px] w-full 2xl:h-[600px] 4xl:h-[700px]"
+    >
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        effect="fade"
         speed={1500}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
+        onInit={(swiper) => {
+          /*
+          const activeSlide = swiper.slides[swiper.activeIndex];
+          const elements = activeSlide.querySelectorAll(
+            '.hero-content-element',
+          );
+          gsap.fromTo(
+            elements,
+            { opacity: 0.5, y: 20 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              stagger: 0.2,
+              ease: 'power3.out',
+              delay: 0.2,
+            },
+          );
+          */
+        }}
+        onSlideChange={(swiper) => {
+          /*
+          const activeSlide = swiper.slides[swiper.activeIndex];
+          const elements = activeSlide.querySelectorAll(
+            '.hero-content-element',
+          );
+          gsap.fromTo(
+            elements,
+            { opacity: 0.5, y: 20 },
+            { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: 'power3.out' },
+          );
+          */
+        }}
         navigation={{
           prevEl: '.swiper-button-prev-custom',
           nextEl: '.swiper-button-next-custom',
@@ -51,21 +91,21 @@ export const HeroBannerSection = (): React.ReactNode => {
         className="h-full w-full"
       >
         {slides.map((slide) => (
-          <SwiperSlide key={slide.id}>
+          <SwiperSlide className="slide" key={slide.id}>
             <div
               className="relative flex h-full w-full items-center justify-center bg-cover bg-center"
               style={{ backgroundImage: `url(${slide.bg})` }}
             >
               <div className="absolute inset-0 bg-black/50" />
 
-              <div className="relative z-10 mx-auto flex max-w-[468px] flex-col items-center gap-4 px-6 text-center text-white md:px-0 xl:max-w-[600px]">
-                <h1 className="text-lg font-bold leading-tight md:text-[26px] xl:text-[30px] 2xl:text-2xl 4xl:text-5xl">
+              <div className="relative z-10 mx-auto flex max-w-[468px] flex-col items-center gap-4 px-6 text-center text-white md:px-0 xl:max-w-[680px] 3xl:max-w-[864px]">
+                <h1 className="hero-content-element text-lg font-bold leading-tight md:text-[26px] xl:text-[30px] 2xl:text-[36px] 4xl:text-[40px]">
                   {slide.title}
                 </h1>
-                <p className="max-w-[340px] text-xs text-white/80 md:max-w-none md:text-sm 2xl:text-base">
+                <p className="hero-content-element max-w-[340px] text-xs text-white/80 md:max-w-none md:text-sm 2xl:text-base">
                   {slide.description}
                 </p>
-                <button className="hover:text-brand-dark mt-4 rounded-full border border-white px-4 py-2 text-sm font-semibold transition-colors hover:bg-white lg:px-6 lg:py-3 xl:text-base">
+                <button className="hero-content-element mt-4 rounded-full border border-white px-4 py-2 text-sm font-semibold transition-colors hover:bg-white hover:text-brand-dark lg:px-6 lg:py-3 xl:text-base 2xl:px-7">
                   Nhận tư vấn ngay
                 </button>
               </div>
