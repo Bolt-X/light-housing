@@ -39,10 +39,7 @@ export const HeroBannerSection = (): React.ReactNode => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div
-      ref={containerRef}
-      className="group relative h-[500px] w-full 2xl:h-[600px] 4xl:h-[700px]"
-    >
+    <div ref={containerRef} className="group relative h-screen w-full">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         speed={1500}
