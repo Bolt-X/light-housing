@@ -115,16 +115,16 @@ export const HeroBannerSection = (): React.ReactNode => {
       </Swiper>
 
       {/* Custom Navigation */}
-      <button className="swiper-button-prev-custom absolute left-6 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-white/50 p-2 text-white transition-colors hover:bg-white/20 md:flex">
+      <button className="swiper-button-prev-custom absolute left-6 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-white/50 p-2 text-white transition-colors hover:bg-white/20 md:flex 2xl:p-3">
         <img
-          className="h-5 w-5 brightness-0 invert"
+          className="h-5 w-5 brightness-0 invert 2xl:size-6"
           alt="prev"
           src="/assets/icons/arrow_left.svg"
         />
       </button>
-      <button className="swiper-button-next-custom absolute right-6 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-white/50 p-2 text-white transition-colors hover:bg-white/20 md:flex">
+      <button className="swiper-button-next-custom absolute right-6 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-white/50 p-2 text-white transition-colors hover:bg-white/20 md:flex 2xl:p-3">
         <img
-          className="h-5 w-5 brightness-0 invert"
+          className="h-5 w-5 brightness-0 invert 2xl:size-6"
           alt="next"
           src="/assets/icons/arrow_right.svg"
         />
