@@ -119,11 +119,42 @@ const ContentBlock = ({
   );
 };
 
-const ImageBlock = ({ image }: { image: string }) => (
-  <div className="relative min-h-[300px] w-full md:min-h-0 md:w-1/2">
+const ImageBlock = ({ image }: { image: string }) => {
+  const imageRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (imageRef.current) {
+        gsap.fromTo(
+          imageRef.current,
+          { yPercent: -20 },
+          {
+            yPercent: 20,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            },
+          },
+        );
+      }
+    },
+    { scope: containerRef },
+  );
+
+  return (
     <div
-      className="absolute inset-0 bg-cover bg-center"
-      style={{ backgroundImage: `url(${image})` }}
-    />
-  </div>
-);
+      ref={containerRef}
+      className="relative min-h-[300px] w-full overflow-hidden md:min-h-0 md:w-1/2"
+    >
+      <div
+        ref={imageRef}
+        className="absolute inset-0 -top-[15%] h-[130%] bg-cover bg-center"
+        style={{ backgroundImage: `url(${image})` }}
+      />
+    </div>
+  );
+};

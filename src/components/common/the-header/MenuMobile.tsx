@@ -51,13 +51,13 @@ const DUMMY_NAVIGATION = [
 export default function MobileMenu({ handleSearch }: MobileMenuProps) {
   const [isOpenSubMenu, setIsOpenSubMenu] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>('');
-  const { smoother } = useScrollSmoother();
+  const { lenis } = useScrollSmoother();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   return (
     <Dialog>
       <DialogTrigger
-        onClick={() => smoother?.paused(true)}
+        onClick={() => lenis?.stop()}
         asChild
         className="block"
       >
@@ -83,7 +83,7 @@ export default function MobileMenu({ handleSearch }: MobileMenuProps) {
             <DialogClose
               onClick={() => {
                 setIsOpenSubMenu(false);
-                smoother?.paused(false);
+                lenis?.start();
               }}
               asChild
               className="border-none outline-none"
@@ -104,10 +104,9 @@ export default function MobileMenu({ handleSearch }: MobileMenuProps) {
             </DialogClose>
 
             <DialogClose
-              ref={closeButtonRef}
               onClick={() => {
                 setIsOpenSubMenu(false);
-                smoother?.paused(false);
+                lenis?.start();
               }}
               asChild
               className="border-none outline-none"
@@ -194,7 +193,7 @@ export default function MobileMenu({ handleSearch }: MobileMenuProps) {
                             {item?.sub_items?.map((sub: any, sIdx: number) => (
                               <DialogClose
                                 key={sIdx}
-                                onClick={() => smoother?.paused(false)}
+                                onClick={() => lenis?.start()}
                                 asChild
                               >
                                 <CustomLink
@@ -210,7 +209,7 @@ export default function MobileMenu({ handleSearch }: MobileMenuProps) {
                       </AccordionItem>
                     ) : (
                       <DialogClose
-                        onClick={() => smoother?.paused(false)}
+                        onClick={() => lenis?.start()}
                         asChild
                       >
                         <CustomLink

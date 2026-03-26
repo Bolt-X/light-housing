@@ -26,37 +26,39 @@ export const HeroBannerSection = (): React.ReactNode => {
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
         onInit={(swiper) => {
-          /*
+          // const activeSlide = swiper.slides[swiper.activeIndex];
+          // const elements = activeSlide.querySelectorAll(
+          //   '.hero-content-element',
+          // );
+          // gsap.fromTo(
+          //   elements,
+          //   { opacity: 0.5, y: 80 },
+          //   {
+          //     opacity: 1,
+          //     y: 0,
+          //     duration: 0.8,
+          //     stagger: 0.4,
+          //     ease: 'power3.in',
+          //     delay: 0.2,
+          //   },
+          // );
+        }}
+        onSlideChange={(swiper) => {
           const activeSlide = swiper.slides[swiper.activeIndex];
           const elements = activeSlide.querySelectorAll(
             '.hero-content-element',
           );
           gsap.fromTo(
             elements,
-            { opacity: 0.5, y: 20 },
+            { opacity: 0.2, y: 80 },
             {
               opacity: 1,
               y: 0,
-              duration: 0.8,
+              duration: 0.5,
               stagger: 0.2,
-              ease: 'power3.out',
-              delay: 0.2,
+              ease: 'ease.in',
             },
           );
-          */
-        }}
-        onSlideChange={(swiper) => {
-          /*
-          const activeSlide = swiper.slides[swiper.activeIndex];
-          const elements = activeSlide.querySelectorAll(
-            '.hero-content-element',
-          );
-          gsap.fromTo(
-            elements,
-            { opacity: 0.5, y: 20 },
-            { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: 'power3.out' },
-          );
-          */
         }}
         navigation={{
           prevEl: '.swiper-button-prev-custom',

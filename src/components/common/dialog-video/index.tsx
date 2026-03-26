@@ -29,12 +29,12 @@ export default function DialogVideo({
   onToggle,
   videoUrl,
 }: DialogVideoProps) {
-  const { smoother } = useScrollSmoother();
+  const { lenis } = useScrollSmoother();
 
   return (
     <Dialog open={open} onOpenChange={onToggle}>
       <DialogTrigger
-        onClick={() => smoother?.paused(true)}
+        onClick={() => lenis?.stop()}
         asChild
         className="!p-0"
       >
@@ -50,7 +50,7 @@ export default function DialogVideo({
         <div
           onClick={() => {
             onToggle(false);
-            smoother?.paused(false);
+            lenis?.start();
           }}
           className="flex h-full w-full cursor-auto items-center justify-center"
         >
@@ -69,7 +69,7 @@ export default function DialogVideo({
               />
 
               <DialogClose
-                onClick={() => smoother?.paused(false)}
+                onClick={() => lenis?.start()}
                 className="data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute right-0 top-0 -translate-y-1/2 translate-x-1/2 rounded-full bg-primary-600 p-[6px] focus:outline-none disabled:pointer-events-none md:p-2"
               >
                 <X className="h-4 w-4 invert" />
