@@ -5,44 +5,47 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useRef } from 'react';
 
-import { FEATURED_PROPERTIES, FEATURED_PROPERTIES_CONTENT } from '../../../constants/featuredProperties';
+import {
+  FEATURED_PROPERTIES,
+  FEATURED_PROPERTIES_CONTENT,
+} from '../../../constants/featuredProperties';
 
 export const FeaturedPropertiesSection = (): React.ReactNode => {
   const containerRef = useRef<HTMLDivElement>(null);
   const features = FEATURED_PROPERTIES;
 
-  useGSAP(
-    () => {
-      const featureItems = gsap.utils.toArray('.feature-item');
+  // useGSAP(
+  //   () => {
+  //     const featureItems = gsap.utils.toArray('.feature-item');
 
-      gsap.fromTo(
-        featureItems,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top 10%',
-            end: '+=150%',
-            pin: true,
-            pinSpacing: true,
-            toggleActions: 'play none none none',
-            scrub: 1,
-          },
-        },
-      );
-    },
-    { scope: containerRef },
-  );
+  //     gsap.fromTo(
+  //       featureItems,
+  //       { opacity: 0, y: 50 },
+  //       {
+  //         opacity: 1,
+  //         y: 0,
+  //         duration: 0.8,
+  //         stagger: 0.2,
+  //         ease: 'power2.out',
+  //         scrollTrigger: {
+  //           trigger: containerRef.current,
+  //           start: 'top 10%',
+  //           end: '+=150%',
+  //           pin: true,
+  //           pinSpacing: true,
+  //           toggleActions: 'play none none none',
+  //           scrub: 1,
+  //         },
+  //       },
+  //     );
+  //   },
+  //   { scope: containerRef },
+  // );
 
   return (
     <div
       ref={containerRef}
-      className="container relative flex min-h-[400px] w-full flex-col items-center py-10 md:min-h-[622px] xl:py-20"
+      className="relative flex min-h-[400px] w-full flex-col items-center py-10 md:min-h-[622px] xl:py-20"
     >
       {/* <div className="pointer-events-none absolute inset-0 z-0 select-none">
         <img
@@ -52,7 +55,7 @@ export const FeaturedPropertiesSection = (): React.ReactNode => {
         />
       </div> */}
       <div className="relative z-10 flex w-full flex-col items-center gap-10">
-        <div className="flex w-full flex-col items-center gap-2 xl:gap-3">
+        <div className="container flex w-full flex-col items-center gap-2 xl:gap-3">
           <div className="section-subtitle text-center">
             {FEATURED_PROPERTIES_CONTENT.subtitle}
           </div>
@@ -63,7 +66,7 @@ export const FeaturedPropertiesSection = (): React.ReactNode => {
         </div>
 
         <div className="custom-scrollbar w-full overflow-x-auto overflow-y-hidden pb-6">
-          <div className="mx-auto grid w-max grid-cols-5 gap-8 px-4 md:gap-10 md:px-0 xl:max-w-none xl:grid-cols-5">
+          <div className="mx-auto grid w-max grid-cols-5 gap-8 px-4 md:gap-10 md:px-10 xl:max-w-none xl:grid-cols-5">
             {features.map((feature) => (
               <div
                 key={feature.id}
