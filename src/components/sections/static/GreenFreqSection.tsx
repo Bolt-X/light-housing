@@ -4,7 +4,10 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useEffect, useMemo, useRef } from 'react';
 
-import { GREEN_FREQ_CONTENT, GREEN_FREQ_FEATURES } from '../../../constants/features';
+import {
+  GREEN_FREQ_CONTENT,
+  GREEN_FREQ_FEATURES,
+} from '../../../constants/features';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -55,6 +58,7 @@ const SVG_PATH = buildPath();
 const GreenFreqSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
+  const patternRef = useRef<HTMLImageElement>(null);
 
   useGSAP(
     () => {
@@ -89,6 +93,19 @@ const GreenFreqSection = () => {
         },
       });
 
+      if (patternRef.current) {
+        gsap.to(patternRef.current, {
+          y: '15%',
+          ease: 'power1.out',
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+      }
+
       if (pathRef.current) {
         const len = pathRef.current.getTotalLength();
         gsap.set(pathRef.current, {
@@ -118,6 +135,7 @@ const GreenFreqSection = () => {
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="from-brand-primary/15 absolute left-0 top-1/4 h-[600px] w-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] via-transparent to-transparent" />
         <img
+          ref={patternRef}
           src="/assets/bgs/bg-pattern-2.png"
           alt=""
           className="h-full w-full object-cover opacity-60 mix-blend-overlay"
@@ -133,9 +151,10 @@ const GreenFreqSection = () => {
           <h2 className="section-title mb-5 !text-white">
             {GREEN_FREQ_CONTENT.title}
           </h2>
-          <p className="text-sm leading-relaxed text-[#A8CCDF] md:text-base">
-            {GREEN_FREQ_CONTENT.description}
-          </p>
+          <p
+            className="text-sm leading-relaxed text-[#A8CCDF] md:text-base"
+            dangerouslySetInnerHTML={{ __html: GREEN_FREQ_CONTENT.description }}
+          />
         </div>
 
         {/* ── DESKTOP: staircase grid ── */}

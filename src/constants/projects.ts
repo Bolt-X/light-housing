@@ -11,7 +11,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 1,
     year: '2026',
-    title: 'Nhà ở thương mại Nha Trang',
+    title: 'Light Housing Nha Trang',
     description:
       'Mang tinh thần phóng khoáng của thành phố biển, dự án kiến tạo một chuẩn mực mới cho phong cách “sống sang – sống đẹp” tại phía Nam Nha Trang. Không gian được kiến tạo với tầm nhìn đa tầng hiếm có, giao hòa giữa biển, núi và sông, tạo nên một tổng thể khoáng đạt và giàu cảm hứng. Mỗi trải nghiệm sống được nâng tầm qua sự tinh tế trong thiết kế và chất lượng hoàn thiện, mở ra nhịp sống hiện đại, năng động. ',
     image: '/assets/images/project_nha_trang.jpg',
@@ -20,7 +20,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: 2,
     year: '2026',
-    title: 'Light Housing Eco Hill (Phường Thủy Xuân, TP. Huế)',
+    title: 'Eco Hill (Phường Thủy Xuân, TP. Huế)',
     description:
       'Tọa lạc tại Thủy Xuân, kề cận dòng sông Hương êm đềm, Eco Hill mở ra một không gian sống tĩnh tại và giàu chiều sâu. Địa hình thoải đồi đặc trưng tạo nên nhịp điệu cảnh quan riêng biệt, đồng thời mang đến nền đất cao ráo, ổn định, hạn chế tác động của ngập lụt. Trên nền cảnh quan ấy, dự án hướng đến một chuẩn sống chất lượng cao, nơi sự an yên, riêng tư và bền vững được nâng niu như những giá trị cốt lõi cho hành trình an cư lâu dài.',
     image: '/assets/images/project_eco_hill.jpg',

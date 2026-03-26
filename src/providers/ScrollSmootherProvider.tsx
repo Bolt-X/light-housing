@@ -44,6 +44,26 @@ export function ScrollSmootherProvider({
       ScrollTrigger.update();
     });
 
+    // Handle hash link scrolling smoothly
+    const handleHashClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a');
+      const href = anchor?.getAttribute('href');
+
+      if (href?.startsWith('#') && href.length > 1) {
+        e.preventDefault();
+        lenisInstance.scrollTo(href);
+      }
+    };
+
+    document.addEventListener('click', handleHashClick);
+
+    // Refresh ScrollTrigger when page height changes
+    const observer = new ResizeObserver(() => {
+      ScrollTrigger.refresh();
+    });
+    observer.observe(document.body);
+
     // Connect Lenis to GSAP ticker
     function update(time: number) {
       lenisInstance.raf(time * 1000);
@@ -55,6 +75,8 @@ export function ScrollSmootherProvider({
     return () => {
       lenisInstance.destroy();
       gsap.ticker.remove(update);
+      document.removeEventListener('click', handleHashClick);
+      observer.disconnect();
       setLenis(null);
     };
   }, []);

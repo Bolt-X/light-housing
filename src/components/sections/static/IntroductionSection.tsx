@@ -4,7 +4,10 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
-import { INTRODUCTION_CONTENT, INTRODUCTION_ASSETS } from '../../../constants/introduction';
+import {
+  INTRODUCTION_CONTENT,
+  INTRODUCTION_ASSETS,
+} from '../../../constants/introduction';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,9 +36,9 @@ export const IntroductionSection = (): React.ReactNode => {
       if (imageRef.current) {
         gsap.fromTo(
           imageRef.current,
-          { scale: 1.1, y: -20 },
+          { scale: 1.1, y: -60 },
           {
-            y: 20,
+            y: 60,
             ease: 'none',
             scrollTrigger: {
               trigger: sectionRef.current,
@@ -68,7 +71,9 @@ export const IntroductionSection = (): React.ReactNode => {
         </div>
 
         <div className="relative z-10 flex flex-col gap-2 bg-transparent xl:gap-4">
-          <span className="section-subtitle">{INTRODUCTION_CONTENT.subtitle}</span>
+          <span className="section-subtitle">
+            {INTRODUCTION_CONTENT.subtitle}
+          </span>
 
           <h2 className="section-title text-brand-dark">
             {INTRODUCTION_CONTENT.title}

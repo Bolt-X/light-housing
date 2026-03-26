@@ -39,6 +39,6 @@ export const GREEN_FREQ_FEATURES: FeatureItem[] = [
 export const GREEN_FREQ_CONTENT = {
   subtitle: 'Kiên Định Với Chất Sống',
   title: 'Tần Số Xanh',
-  description:
-    'Light Housing là thương hiệu phát triển bất động sản quốc dân, tập trung vào các giải pháp nhà ở phù hợp với nhu cầu an cư thực của người trẻ và gia đình đô thị. Chúng tôi tin rằng hạnh phúc không bắt đầu từ những điều xa vời, mà từ một khởi đầu ổn định và vững tâm.',
+  description: `Nơi những giá trị bền vững được đáp lời bằng những giải pháp thực, nơi những con người có cùng tần số được kết nối và an cư tại cùng một tọa độ. <br/>
+    Light Housing dùng tư duy TỐI ƯU để tạo ra những giá trị THIẾT THỰC, đưa chất sống của đại chúng lên một CAO TẦN XANH mới.`,
 };
