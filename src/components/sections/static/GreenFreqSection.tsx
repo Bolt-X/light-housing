@@ -4,6 +4,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useEffect, useMemo, useRef } from 'react';
 
+import { GREEN_FREQ_CONTENT, GREEN_FREQ_FEATURES } from '../../../constants/features';
+
 gsap.registerPlugin(ScrollTrigger);
 
 const N = 4;
@@ -46,36 +48,7 @@ const buildPath = (amp = 60) => {
   return d;
 };
 
-const features = [
-  {
-    id: 1,
-    title: 'Dải tần Xanh Kiến trúc',
-    description:
-      'Tần số xanh bắt đầu từ không gian sống. Light Housing tối ưu layout, tận dụng ánh sáng và thông gió tự nhiên, nâng cao hiệu quả sử dụng và tiết kiệm năng lượng.',
-    image: '/assets/images/step_1.svg',
-  },
-  {
-    id: 2,
-    title: 'Dải tần Xanh Trải nghiệm',
-    description:
-      'Hệ tiện ích được lựa chọn có chủ đích, tập trung vào nhu cầu thiết yếu hằng ngày. Không gian cộng đồng, khu vui chơi và mảng xanh được tổ chức như những "điểm chạm" giúp cư dân kết nối, thư giãn và tái tạo năng lượng.',
-    image: '/assets/images/step_2.svg',
-  },
-  {
-    id: 3,
-    title: 'Dải tần Xanh Vận hành',
-    description:
-      'Tần số xanh được duy trì qua hệ vận hành thông minh, tối ưu và tiết kiệm. Số hóa quản lý giúp tinh gọn quy trình, giảm chi phí và hạn chế lãng phí, đồng thời hướng đến một đời sống ổn định, hiệu quả và bền vững.',
-    image: '/assets/images/step_3.svg',
-  },
-  {
-    id: 4,
-    title: 'Dải tần Xanh Đồng hành',
-    description:
-      '"Tần số xanh" không chỉ trong không gian sống mà còn trong hành trình sở hữu. Pháp lý minh bạch, quy trình rõ ràng và tài chính linh hoạt giúp việc an cư trở nên nhẹ nhàng, bền vững hơn.',
-    image: '/assets/images/step_4.svg',
-  },
-];
+const features = GREEN_FREQ_FEATURES;
 
 const SVG_PATH = buildPath();
 
@@ -155,14 +128,13 @@ const GreenFreqSection = () => {
         {/* Header */}
         <div className="gf-header absolute top-10 lg:top-16 lg:max-w-[calc(100%/2)] xl:top-24 xl:max-w-[800px]">
           <p className="section-subtitle mb-2 uppercase tracking-widest !text-[#A8CCDF]">
-            Kiên Định Với Chất Sống
+            {GREEN_FREQ_CONTENT.subtitle}
           </p>
-          <h2 className="section-title mb-5 !text-white">Tần Số Xanh</h2>
+          <h2 className="section-title mb-5 !text-white">
+            {GREEN_FREQ_CONTENT.title}
+          </h2>
           <p className="text-sm leading-relaxed text-[#A8CCDF] md:text-base">
-            Light Housing là thương hiệu phát triển bất động sản quốc dân, tập
-            trung vào các giải pháp nhà ở phù hợp với nhu cầu an cư thực của
-            người trẻ và gia đình đô thị. Chúng tôi tin rằng hạnh phúc không bắt
-            đầu từ những điều xa vời, mà từ một khởi đầu ổn định và vững tâm.
+            {GREEN_FREQ_CONTENT.description}
           </p>
         </div>
 

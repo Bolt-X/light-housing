@@ -1,5 +1,5 @@
 export const PROJECT_CONSTANTS = {
-  SCOPE: 'urbaniz_sam_son',
-  HOME_PAGE_SLUG: 'trang-chu-urbaniz-sam-son',
-  NAV_MENU_SLUG: 'menu-urbaniz-sam-son',
+  SCOPE: 'light_housing',
+  HOME_PAGE_SLUG: 'trang-chu-light-housing',
+  NAV_MENU_SLUG: 'menu-light-housing',
 } as const;

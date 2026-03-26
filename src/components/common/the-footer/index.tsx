@@ -1,45 +1,13 @@
 'use client';
 import { useState } from 'react';
 
-const contactInfoItems = [
-  {
-    icon: '/assets/icons/map_point.svg',
-    alt: 'Outline map location',
-    text: 'Số 11B Cát Linh, phường Ô Chợ Dừa, thành phố Hà Nội',
-  },
-  {
-    icon: '/assets/icons/mail.svg',
-    alt: 'Huge icon',
-    text: 'info@lighthousing.vn',
-  },
-  {
-    icon: '/assets/icons/phone.svg',
-    alt: 'Outline call phone',
-    text: '098 904 8810',
-  },
-];
-
-const aboutLinks = [
-  'Về Lighthousing',
-  'Cẩm nang mua nhà',
-  'Chính sách',
-  'Tin tức',
-];
-
-const socialIcons = [
-  {
-    src: 'https://c.animaapp.com/Bhe9g9ou/img/huge-icon-social-solid-facebook-1.svg',
-    alt: 'Huge icon social facebook',
-  },
-  {
-    src: 'https://c.animaapp.com/Bhe9g9ou/img/huge-icon-social-solid-youtube-1.svg',
-    alt: 'Huge icon social youtube',
-  },
-  {
-    src: 'https://c.animaapp.com/Bhe9g9ou/img/huge-icon-social-solid-messenger-1.svg',
-    alt: 'Huge icon social messenger',
-  },
-];
+import {
+  ABOUT_LINKS,
+  CONTACT_INFO,
+  FOOTER_CONTENT,
+  SOCIAL_LINKS,
+} from '@/src/constants/footer';
+import { Link } from '@/src/i18n/navigation';
 
 const TheFooter = (): React.ReactNode => {
   const [formData, setFormData] = useState({
@@ -70,14 +38,17 @@ const TheFooter = (): React.ReactNode => {
           />
 
           <div className="flex flex-col gap-4 md:gap-6">
-            <h3 className="text-lg font-bold text-white md:text-lg lg:text-[22px] xl:text-[30px] 4xl:text-[36px]">
-              CÔNG TY CỔ PHẦN LIGHT HOUSING
+            <h3 className="text-lg font-bold uppercase text-white xl:text-xl 4xl:text-[24px]">
+              {FOOTER_CONTENT.tagline} <br className="block md:hidden" />{' '}
+              {FOOTER_CONTENT.companyName}
             </h3>
 
             <div className="flex flex-col gap-3">
-              {contactInfoItems.map((item, index) => (
-                <div
+              {CONTACT_INFO.map((item, index) => (
+                <Link
                   key={index}
+                  href={item.href}
+                  target="_blank"
                   className="flex cursor-pointer items-start gap-4 transition-transform hover:translate-x-1"
                 >
                   <img
@@ -88,7 +59,7 @@ const TheFooter = (): React.ReactNode => {
                   <p className="text-sm leading-relaxed text-white/80 md:text-base">
                     {item.text}
                   </p>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -98,17 +69,17 @@ const TheFooter = (): React.ReactNode => {
           {/* NAVIGATION */}
           <div className="flex flex-col gap-4 md:gap-6 4xl:flex-1">
             <h4 className="text-lg font-bold text-white md:text-lg 3xl:text-[22px]">
-              Về chúng tôi
+              {FOOTER_CONTENT.aboutTitle}
             </h4>
 
             <nav className="flex flex-col gap-3 2xl:gap-4">
-              {aboutLinks.map((link, index) => (
+              {ABOUT_LINKS.map((link, index) => (
                 <a
                   key={index}
-                  href="#"
+                  href={link.href}
                   className="text-sm text-white/80 transition-colors hover:text-white md:text-base"
                 >
-                  {link}
+                  {link.text}
                 </a>
               ))}
             </nav>
@@ -118,13 +89,15 @@ const TheFooter = (): React.ReactNode => {
           <div className="flex flex-col gap-10 2xl:gap-[60px]">
             <div className="flex flex-col gap-4 md:gap-6">
               <h4 className="text-lg font-bold text-white md:text-lg 3xl:text-[22px]">
-                Theo dõi chúng tôi
+                {FOOTER_CONTENT.followTitle}
               </h4>
               <div className="flex items-start gap-4 xl:gap-6">
-                {socialIcons.map((icon, index) => (
+                {SOCIAL_LINKS.map((icon, index) => (
                   <a
                     key={index}
-                    href="#"
+                    href={icon.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="transition-transform hover:scale-110"
                   >
                     <img className="h-6 w-6" alt={icon.alt} src={icon.src} />
@@ -135,7 +108,7 @@ const TheFooter = (): React.ReactNode => {
 
             <div className="flex flex-col gap-4 md:gap-6">
               <h4 className="text-lg font-bold text-white md:text-lg 3xl:text-[22px]">
-                Ứng dụng
+                {FOOTER_CONTENT.appsTitle}
               </h4>
               <div className="flex flex-wrap gap-4 xl:flex-col 4xl:flex-row">
                 <a
@@ -179,7 +152,7 @@ const TheFooter = (): React.ReactNode => {
         {/* CONTACT FORM */}
         <div className="flex flex-col gap-6 lg:max-w-md">
           <h4 className="text-lg font-bold text-white md:text-lg 3xl:text-[22px]">
-            Gửi tin nhắn cho chúng tôi
+            {FOOTER_CONTENT.contactTitle}
           </h4>
 
           <form
@@ -193,7 +166,7 @@ const TheFooter = (): React.ReactNode => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Họ và tên..."
-                className="text-brand-dark placeholder:text-brand-dark/70 w-full rounded-lg bg-white/50 px-3 py-2 text-sm outline-none md:w-[calc(50%_-_8px)] lg:w-full lg:text-base"
+                className="w-full rounded-lg bg-white/50 px-3 py-2 text-sm text-brand-dark outline-none placeholder:text-brand-dark/70 md:w-[calc(50%_-_8px)] lg:w-full lg:text-base"
               />
 
               <input
@@ -202,7 +175,7 @@ const TheFooter = (): React.ReactNode => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Nhập địa chỉ mail"
-                className="text-brand-dark placeholder:text-brand-dark/70 w-full rounded-lg bg-white/50 px-3 py-2 text-sm outline-none md:w-[calc(50%_-_8px)] lg:w-full lg:text-base"
+                className="w-full rounded-lg bg-white/50 px-3 py-2 text-sm text-brand-dark outline-none placeholder:text-brand-dark/70 md:w-[calc(50%_-_8px)] lg:w-full lg:text-base"
               />
             </div>
 
@@ -210,14 +183,14 @@ const TheFooter = (): React.ReactNode => {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              placeholder="Họ và tên"
-              className="text-brand-dark placeholder:text-brand-dark/70 min-h-[120px] w-full resize-none rounded-lg bg-white/50 px-3 py-2 text-sm outline-none lg:text-base"
+              placeholder="Nội dung tin nhắn..."
+              className="min-h-[120px] w-full resize-none rounded-lg bg-white/50 px-3 py-2 text-sm text-brand-dark outline-none placeholder:text-brand-dark/70 lg:text-base"
               rows={4}
             />
 
             <button
               type="submit"
-              className="hover:bg-brand w-full rounded-lg bg-[#023A5C] py-3 text-base font-semibold text-white transition-all"
+              className="w-full rounded-lg bg-[#023A5C] py-3 text-base font-semibold text-white transition-all hover:bg-brand"
             >
               Gửi tin nhắn
             </button>
@@ -227,7 +200,7 @@ const TheFooter = (): React.ReactNode => {
 
       <div className="flex w-full items-center justify-center border-t border-white/50 pt-6 text-center lg:pt-8 xl:items-start xl:justify-start xl:pt-10 xl:text-left xl:text-base 4xl:mx-auto 4xl:max-w-[1880px]">
         <p className="text-sm font-normal text-white">
-          Copyright © 2025 LIGHT HOUSING. All rights reserved.
+          {FOOTER_CONTENT.copyright}
         </p>
       </div>
     </footer>

@@ -3,19 +3,10 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
+import { PARTNER_CONTENT, PARTNER_DATA } from '../../../constants/partners';
 
 export const PartnerSection = (): React.ReactNode => {
-  const originalPartners = [
-    { name: 'Finra', image: '/assets/images/partner_finra.png' },
-    { name: 'Grand Ocean', image: '/assets/images/partner_grand_ocean.svg' },
-    { name: 'Hoàng Minh', image: '/assets/images/partner_hoang_minh.png' },
-    { name: 'Homes', image: '/assets/images/partner_homes.png' },
-    {
-      name: 'Hưng Thịnh Phát',
-      image: '/assets/images/partner_hung_thinh_phat.png',
-    },
-    { name: 'TTD', image: '/assets/images/partner_ttd.png' },
-  ];
+  const originalPartners = PARTNER_DATA;
 
   /* Duplicate the array to ensure flawless infinite looping when rendering 6 slides per view */
   const partners = [
@@ -28,11 +19,10 @@ export const PartnerSection = (): React.ReactNode => {
     <div className="container flex w-full flex-col items-center gap-8 overflow-hidden py-10 xl:gap-[60px] xl:py-16">
       {/* Header */}
       <div className="flex flex-col items-center gap-2 text-center lg:gap-4">
-        <span className="section-subtitle">ĐỐI TÁC CHIẾN LƯỢC</span>
+        <span className="section-subtitle">{PARTNER_CONTENT.subtitle}</span>
 
         <h2 className="section-title text-center text-brand-dark">
-          Chúng tôi hợp tác cùng các đơn vị uy tín trong lĩnh vực tài chính, xây
-          dựng
+          {PARTNER_CONTENT.title}
         </h2>
       </div>
 

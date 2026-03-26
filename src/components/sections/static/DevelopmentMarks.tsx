@@ -7,84 +7,11 @@ import { useRef, useState } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const projects = [
-  {
-    id: 4,
-    name: 'Light Housing Hải Phòng',
-    position: { top: '18%', left: '35%' },
-    details: [
-      { label: 'Vị trí', value: 'Hải Phòng', isSuccess: false },
-      { label: 'Diện tích ô đất', value: '15000 m2', isSuccess: false },
-      { label: 'Mật độ xây dựng', value: '35%', isSuccess: false },
-      { label: 'Loại dự án', value: 'Khu đô thị phức hợp', isSuccess: false },
-      {
-        label: 'Tình trạng bất động sản',
-        value: 'Sắp ra mắt',
-        isSuccess: true,
-      },
-      { label: 'Số tầng', value: '25', isSuccess: false },
-      { label: 'Số căn', value: '1200', isSuccess: false },
-      { label: 'Diện tích hầm', value: '10000 m2', isSuccess: false },
-    ],
-  },
-  {
-    id: 1,
-    name: 'Light Housing Huế',
-    position: { top: '40%', left: '54%' },
-    details: [
-      { label: 'Vị trí', value: 'Bàu Vá Huế', isSuccess: false },
-      { label: 'Diện tích ô đất', value: '8652 m2', isSuccess: false },
-      { label: 'Mật độ xây dựng', value: '40%', isSuccess: false },
-      { label: 'Loại dự án', value: 'Nhà ở quốc dân', isSuccess: false },
-      {
-        label: 'Tình trạng bất động sản',
-        value: 'Đã thi công phần móng',
-        isSuccess: true,
-      },
-      { label: 'Số tầng', value: '12', isSuccess: false },
-      { label: 'Số căn', value: '462', isSuccess: false },
-      { label: 'Diện tích hầm', value: '5138 m2', isSuccess: false },
-    ],
-  },
-  {
-    id: 3,
-    name: 'Light Housing Nha Trang',
-    position: { top: '55%', left: '62%' },
-    details: [
-      { label: 'Vị trí', value: 'Nha Trang', isSuccess: false },
-      { label: 'Diện tích ô đất', value: '10000 m2', isSuccess: false },
-      { label: 'Mật độ xây dựng', value: '35%', isSuccess: false },
-      { label: 'Loại dự án', value: 'Nhà ở thương mại', isSuccess: false },
-      {
-        label: 'Tình trạng bất động sản',
-        value: 'Chuẩn bị thi công',
-        isSuccess: true,
-      },
-      { label: 'Số tầng', value: '25', isSuccess: false },
-      { label: 'Số căn', value: '800', isSuccess: false },
-      { label: 'Diện tích hầm', value: '8000 m2', isSuccess: false },
-    ],
-  },
-  {
-    id: 2,
-    name: 'Light Housing TP. Hồ Chí Minh',
-    position: { top: '68%', left: '40%' },
-    details: [
-      { label: 'Vị trí', value: 'Đông Hà, TP. Hồ Chí Minh ', isSuccess: false },
-      { label: 'Diện tích ô đất', value: '6400 m2', isSuccess: false },
-      { label: 'Mật độ xây dựng', value: '42%', isSuccess: false },
-      { label: 'Loại dự án', value: 'Khu dân cư', isSuccess: false },
-      {
-        label: 'Tình trạng bất động sản',
-        value: 'Đang triển khai',
-        isSuccess: true,
-      },
-      { label: 'Số tầng', value: '10', isSuccess: false },
-      { label: 'Số căn', value: '320', isSuccess: false },
-      { label: 'Diện tích hầm', value: '4000 m2', isSuccess: false },
-    ],
-  },
-];
+import { DEVELOPMENT_CONTENT, DEVELOPMENT_PROJECTS } from '../../../constants/development';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const projects = DEVELOPMENT_PROJECTS;
 
 export const DevelopmentMarks = (): React.ReactNode => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -164,23 +91,16 @@ export const DevelopmentMarks = (): React.ReactNode => {
         <div className="relative z-10 flex flex-1 flex-col items-center gap-4 text-center md:items-start md:text-left xl:flex-[1_0_30%]">
           <div className="flex w-full flex-col gap-2 md:gap-3">
             <div className="section-subtitle !text-white/70 md:text-center xl:text-left">
-              DẤU ẤN PHÁT TRIỂN
+              {DEVELOPMENT_CONTENT.subtitle}
             </div>
 
             <p className="section-title !text-white md:text-center xl:text-left">
-              Hành trình kiến tạo <br className="block md:hidden" /> trải dài
-              khắp Việt Nam
+              {DEVELOPMENT_CONTENT.title}
             </p>
           </div>
 
           <p className="max-w-md text-justify text-sm leading-relaxed text-white/80 md:max-w-none md:text-base">
-            Từng bước mở rộng mạng lưới trên các đô thị giàu tiềm năng, chúng
-            tôi hiện phát triển 2 dự án tại Huế, 1 dự án tại Quảng Trị, 1 dự án
-            tại Nha Trang và 1 dự án tại Hải Phòng sắp ra mắt. Mỗi điểm chấm
-            trên bản đồ không chỉ đại diện cho một dự án, mà còn là dấu mốc cho
-            hành trình kiến tạo những không gian sống chất lượng, phù hợp với
-            nhu cầu an cư thực tế và định hướng phát triển bền vững tại nhiều
-            khu vực trên cả nước.
+            {DEVELOPMENT_CONTENT.description}
           </p>
         </div>
 
@@ -267,7 +187,7 @@ export const DevelopmentMarks = (): React.ReactNode => {
               </div>
 
               <div className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg text-brand-dark transition-colors">
-                <span className="text-sm font-semibold">Xem chi tiết</span>
+                <span className="text-sm font-semibold">{DEVELOPMENT_CONTENT.viewDetails}</span>
                 <img
                   src="/assets/icons/chevron_right_brand.svg"
                   alt="Chevron right"

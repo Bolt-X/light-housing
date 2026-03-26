@@ -9,6 +9,7 @@ import LanguageBtn from './LanguageBtn';
 import { Link } from '@/src/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/src/lib/utils';
+import { SOCIAL_LINKS } from '@/src/constants/footer';
 
 export default function TheHeader() {
   const t = useTranslations('Href');
@@ -37,7 +38,7 @@ export default function TheHeader() {
       className={cn(
         'fixed left-0 top-0 z-[100] w-full transition-all duration-300',
         isScrolled
-          ? 'bg-brand/80 border-b border-transparent py-3 shadow-md backdrop-blur-md'
+          ? 'border-b border-transparent bg-brand/80 py-3 shadow-md backdrop-blur-md'
           : 'border-b border-white/20 bg-transparent py-6',
       )}
     >
@@ -97,36 +98,21 @@ export default function TheHeader() {
             </div>
 
             <div className="flex items-center gap-4">
-              <Link
-                href="#"
-                className="text-white transition-opacity hover:opacity-80"
-              >
-                <img
-                  src="/assets/icons/facebook.svg"
-                  alt="Facebook"
-                  className="h-5 w-5 object-contain brightness-0 invert"
-                />
-              </Link>
-              <Link
-                href="#"
-                className="text-white transition-opacity hover:opacity-80"
-              >
-                <img
-                  src="/assets/icons/youtube.svg"
-                  alt="Youtube"
-                  className="h-5 w-5 object-contain brightness-0 invert"
-                />
-              </Link>
-              <Link
-                href="#"
-                className="text-white transition-opacity hover:opacity-80"
-              >
-                <img
-                  src="/assets/icons/messenger.svg"
-                  alt="Messenger"
-                  className="h-5 w-5 object-contain brightness-0 invert"
-                />
-              </Link>
+              {SOCIAL_LINKS.map((icon, index) => (
+                <Link
+                  key={index}
+                  href={icon.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white transition-opacity hover:opacity-80"
+                >
+                  <img
+                    className="h-5 w-5 object-contain brightness-0 invert"
+                    alt={icon.alt}
+                    src={icon.src}
+                  />
+                </Link>
+              ))}
             </div>
           </div>
 

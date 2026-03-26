@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { SITE_CONTENT, SITE_ASSETS } from '../constants/site';
 
 export default function Loading() {
   const [loading, setLoading] = useState(false);
@@ -162,7 +163,7 @@ export default function Loading() {
                 zIndex: -1,
               }} />
               <img
-                src="/assets/logo/logo_primary_light.svg"
+                src={SITE_ASSETS.logoPrimaryLight}
                 alt="Light Housing"
                 fetchPriority="high"
                 loading="eager"
@@ -180,7 +181,7 @@ export default function Loading() {
             fontWeight: 400,
             textAlign: 'center',
           }}>
-            An Cư Bền Vững &nbsp;·&nbsp; Khởi Sinh Giá Trị Sống
+            {SITE_CONTENT.tagline}
           </p>
 
           {/* Progress bar */}

@@ -5,15 +5,11 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useEffect, useRef, useState } from 'react';
 
+import { NOTEBOOK_CONTENT, NOTEBOOK_STEPS } from '../../../constants/notebook';
+
 gsap.registerPlugin(ScrollTrigger);
 
-const steps = [
-  { id: 1, title: 'Tìm hiểu dự án' },
-  { id: 2, title: 'Chuẩn bị hồ sơ' },
-  { id: 3, title: 'Nộp hồ sơ' },
-  { id: 4, title: 'Xét duyệt' },
-  { id: 5, title: 'Ký kết hợp đồng' },
-];
+const steps = NOTEBOOK_STEPS;
 
 const HomePurchaseNotebook = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -103,10 +99,10 @@ const HomePurchaseNotebook = () => {
         {/* Header */}
         <div className="hpn-header space-y-3 2xl:space-y-4">
           <div className="section-subtitle text-[#2F3037]">
-            CẨM NANG MUA NHÀ
+            {NOTEBOOK_CONTENT.subtitle}
           </div>
           <div className="section-title text-brand-dark">
-            Hành trình sở hữu ngôi nhà đầu tiên
+            {NOTEBOOK_CONTENT.title}
           </div>
         </div>
 

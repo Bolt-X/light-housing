@@ -11,32 +11,12 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
-const slides = [
-  {
-    id: 0,
-    bg: '/assets/images/home_banner_slide_1.jpg',
-    title: 'An cư bền vững – Khởi sinh giá trị sống',
-    description:
-      'Những dự án bất động sản giá hợp lý, pháp lý minh bạch và chính sách linh hoạt giúp bạn sở hữu ngôi nhà đầu tiên sớm hơn bạn nghĩ.',
-  },
-  {
-    id: 1,
-    bg: '/assets/images/home_banner_slide_2.jpg',
-    title: 'An cư bền vững – Khởi sinh giá trị sống',
-    description:
-      'Những dự án bất động sản giá hợp lý, pháp lý minh bạch và chính sách linh hoạt giúp bạn sở hữu ngôi nhà đầu tiên sớm hơn bạn nghĩ.',
-  },
-  {
-    id: 2,
-    bg: '/assets/images/home_banner_slide_3.jpg',
-    title: 'An cư bền vững – Khởi sinh giá trị sống',
-    description:
-      'Những dự án bất động sản giá hợp lý, pháp lý minh bạch và chính sách linh hoạt giúp bạn sở hữu ngôi nhà đầu tiên sớm hơn bạn nghĩ.',
-  },
-];
+import { HERO_BUTTON_TEXT, HERO_SLIDES } from '../../../constants/hero';
 
 export const HeroBannerSection = (): React.ReactNode => {
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const slides = HERO_SLIDES;
 
   return (
     <div ref={containerRef} className="group relative h-screen w-full">
@@ -103,7 +83,7 @@ export const HeroBannerSection = (): React.ReactNode => {
                   {slide.description}
                 </p>
                 <button className="hero-content-element mt-4 rounded-full border border-white px-4 py-2 text-sm font-semibold transition-colors hover:bg-white hover:text-brand-dark lg:px-6 lg:py-3 xl:text-base 2xl:px-7">
-                  Nhận tư vấn ngay
+                  {HERO_BUTTON_TEXT}
                 </button>
               </div>
             </div>
