@@ -185,6 +185,18 @@ export default async function RootLayout({
           crossOrigin="anonymous"
         />
         <meta name="format-detection" content="telephone=no" />
+        <Script
+          async
+          defer
+          src="https://www.googletagmanager.com/gtag/js?id=G-CKV3V31NQH"
+        />
+        <Script>
+          {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-CKV3V31NQH');`}
+        </Script>
       </head>
 
       <body className="antialiased">
