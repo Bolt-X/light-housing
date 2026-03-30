@@ -6,7 +6,12 @@ import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { useRef } from 'react';
 
-import { PROJECTS_CONTENT, PROJECTS_DATA } from '../../../constants/projects';
+import {
+  PROJECT_TYPE,
+  PROJECTS_CONTENT,
+  PROJECTS_DATA,
+} from '../../../constants/projects';
+import { cn } from '@/src/lib/utils';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -112,7 +117,14 @@ const ContentBlock = ({
           <ChevronRight className="absolute -right-6 size-5 -translate-x-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 lg:-right-8 lg:size-6 2xl:size-7" />
         </Link>
         {type && (
-          <div className="mx-auto w-fit rounded-full bg-brand-50/70 px-3 py-1 text-sm text-white">
+          <div
+            className={cn(
+              'mx-auto w-fit rounded-full px-3 py-1 text-sm',
+              type === PROJECT_TYPE.COMMERCIAL
+                ? 'bg-brand-400/50 text-white'
+                : 'bg-success-400/50 text-white',
+            )}
+          >
             {type}
           </div>
         )}

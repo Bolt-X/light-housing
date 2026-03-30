@@ -22,7 +22,7 @@ export const NAVIGATION_DATA: NavigationItem[] = [
         sub_items: [
           { title: 'LH HẢI PHÒNG', url: '#' },
           { title: 'LH QUẢNG TRỊ', url: '#' },
-          { title: 'LH HUẾ', url: '#' },
+          { title: 'ECO HILL', url: '#' },
         ],
       },
     ],
