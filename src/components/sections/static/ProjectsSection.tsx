@@ -73,6 +73,7 @@ export const ProjectsSection = (): React.ReactNode => {
               year={project.year}
               title={project.title}
               description={project.description}
+              type={project?.type}
             />
           </div>
         ))}
@@ -85,10 +86,12 @@ const ContentBlock = ({
   year,
   title,
   description,
+  type,
 }: {
   year: string;
   title: string;
   description: string;
+  type?: string;
 }) => {
   return (
     <div className="relative flex flex-1 flex-col items-center justify-center gap-4 py-12 md:gap-7 md:px-10 md:py-0 3xl:px-24">
@@ -101,13 +104,18 @@ const ContentBlock = ({
 
         <Link
           href={'#'}
-          className="group relative flex items-center justify-center text-brand-50 transition-all hover:text-brand-50/80"
+          className="group relative flex items-center justify-center text-brand-500 transition-all hover:text-brand-500/80"
         >
           <span className="text-center text-lg font-bold leading-tight transition-all duration-300 group-hover:underline lg:text-[22px] 2xl:text-[26px]">
             {title}
           </span>
           <ChevronRight className="absolute -right-6 size-5 -translate-x-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 lg:-right-8 lg:size-6 2xl:size-7" />
         </Link>
+        {type && (
+          <div className="mx-auto w-fit rounded-full bg-brand-50/70 px-3 py-1 text-sm text-white">
+            {type}
+          </div>
+        )}
       </div>
 
       <div className="relative flex w-full flex-col items-center gap-6">

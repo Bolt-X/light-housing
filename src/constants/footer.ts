@@ -21,7 +21,7 @@ export const CONTACT_INFO = [
 
 export const ABOUT_LINKS = [
   { text: 'Về Lighthousing', href: '#' },
-  { text: 'Cẩm nang mua nhà', href: '#' },
+  { text: 'Cẩm nang mua nhà ở xã hội', href: '#' },
   { text: 'Chính sách', href: '#' },
   { text: 'Tin tức', href: '#' },
 ];

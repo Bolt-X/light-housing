@@ -12,6 +12,6 @@ export const NOTEBOOK_STEPS: NotebookStep[] = [
 ];
 
 export const NOTEBOOK_CONTENT = {
-  subtitle: 'CẨM NANG MUA NHÀ',
+  subtitle: 'CẨM NANG MUA NHÀ Ở XÃ HỘI',
   title: 'Hành trình sở hữu ngôi nhà đầu tiên',
 };

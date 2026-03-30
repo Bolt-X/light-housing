@@ -24,29 +24,8 @@ type MobileMenuProps = {
 };
 
 // Dummy navigation mapped to the design requirements
-const DUMMY_NAVIGATION = [
-  { title: 'TRANG CHỦ', url: '/' },
-  {
-    title: 'DỰ ÁN',
-    url: '#',
-    sub_items: [
-      { title: 'LH HẢI PHÒNG', url: '#' },
-      { title: 'LH NHA TRANG', url: '#' },
-      { title: 'LH QUẢNG TRỊ', url: '#' },
-      { title: 'LH HUẾ', url: '#' },
-    ],
-  },
-  { title: 'CẨM NANG MUA NHÀ QUỐC DÂN', url: '#' },
-  {
-    title: 'TIN TỨC',
-    url: '#',
-    sub_items: [
-      { title: 'ĐỐI TÁC', url: '#' },
-      { title: 'TUYỂN DỤNG', url: '#' },
-      { title: 'LIÊN HỆ', url: '#' },
-    ],
-  },
-];
+import { NAVIGATION_DATA, NavigationItem } from '@/src/constants/navigation';
+
 
 export default function MobileMenu({ handleSearch }: MobileMenuProps) {
   const [isOpenSubMenu, setIsOpenSubMenu] = useState<boolean>(false);
@@ -156,8 +135,8 @@ export default function MobileMenu({ handleSearch }: MobileMenuProps) {
               type="multiple"
               defaultValue={['item-1', 'item-3']}
             >
-              {DUMMY_NAVIGATION.map((item: any, index: any) => {
-                const hasSubItems = item?.sub_items?.length > 0;
+              {NAVIGATION_DATA.map((item: NavigationItem, index: number) => {
+                const hasSubItems = (item.sub_items?.length ?? 0) > 0;
 
                 return (
                   <div
@@ -170,7 +149,7 @@ export default function MobileMenu({ handleSearch }: MobileMenuProps) {
                         className="border-none"
                       >
                         <AccordionTrigger className="group flex w-full items-center justify-between border-b border-white/30 py-4 text-base font-medium uppercase tracking-wider text-white transition-opacity last:border-none hover:opacity-80">
-                          {item?.title}
+                          {item.title}
                           <div className="relative transition-transform duration-200 group-data-[state=open]:rotate-180">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -190,20 +169,86 @@ export default function MobileMenu({ handleSearch }: MobileMenuProps) {
                         </AccordionTrigger>
                         <AccordionContent>
                           <div className="flex flex-col">
-                            {item?.sub_items?.map((sub: any, sIdx: number) => (
-                              <DialogClose
-                                key={sIdx}
-                                onClick={() => lenis?.start()}
-                                asChild
-                              >
-                                <CustomLink
-                                  href={sub?.url}
-                                  className={`py-3 pl-8 pr-4 text-base font-medium uppercase tracking-wider text-white hover:opacity-80 ${sIdx !== item.sub_items.length - 1 ? 'border-b border-white/20' : ''}`}
+                            {item.sub_items?.map((sub: NavigationItem, sIdx: number) => {
+                              const hasThirdLevel = (sub.sub_items?.length ?? 0) > 0;
+
+                              if (hasThirdLevel) {
+                                return (
+                                  <AccordionRoot
+                                    type="multiple"
+                                    key={sIdx}
+                                  >
+                                    <AccordionItem
+                                      value={`sub-${sIdx}`}
+                                      className="border-none"
+                                    >
+                                      <AccordionTrigger className="group flex w-full items-center justify-between py-3 pl-8 pr-4 text-base font-medium uppercase tracking-wider text-white transition-opacity last:border-none hover:opacity-80">
+                                        {sub.title}
+                                        <div className="relative transition-transform duration-200 group-data-[state=open]:rotate-180">
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth="2.5"
+                                            stroke="currentColor"
+                                            className="h-4 w-4 text-white"
+                                          >
+                                            <path
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"
+                                              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                                            />
+                                          </svg>
+                                        </div>
+                                      </AccordionTrigger>
+                                      <AccordionContent>
+                                        <div className="flex flex-col">
+                                          {sub.sub_items?.map(
+                                            (third: NavigationItem, tIdx: number) => (
+                                              <DialogClose
+                                                key={tIdx}
+                                                onClick={() => lenis?.start()}
+                                                asChild
+                                              >
+                                                <CustomLink
+                                                  href={third.url}
+                                                  className={`py-3 pl-12 pr-4 text-base font-medium uppercase tracking-wider text-white transition-opacity hover:opacity-80 ${
+                                                    tIdx !== sub.sub_items!.length - 1
+                                                      ? 'border-b border-white/20'
+                                                      : ''
+                                                  }`}
+                                                >
+                                                  {third.title}
+                                                </CustomLink>
+                                              </DialogClose>
+                                            )
+                                          )}
+                                        </div>
+                                      </AccordionContent>
+                                    </AccordionItem>
+                                  </AccordionRoot>
+                                );
+                              }
+
+                              return (
+                                <DialogClose
+                                  key={sIdx}
+                                  onClick={() => lenis?.start()}
+                                  asChild
                                 >
-                                  {sub?.title}
-                                </CustomLink>
-                              </DialogClose>
-                            ))}
+                                  <CustomLink
+                                    href={sub.url}
+                                    className={`py-3 pl-8 pr-4 text-base font-medium uppercase tracking-wider text-white transition-opacity hover:opacity-80 ${
+                                      sIdx !== item.sub_items!.length - 1
+                                        ? 'border-b border-white/20'
+                                        : ''
+                                    }`}
+                                  >
+                                    {sub.title}
+                                  </CustomLink>
+                                </DialogClose>
+                              );
+                            })}
                           </div>
                         </AccordionContent>
                       </AccordionItem>
@@ -213,10 +258,10 @@ export default function MobileMenu({ handleSearch }: MobileMenuProps) {
                         asChild
                       >
                         <CustomLink
-                          href={item?.url || ''}
+                          href={item.url || ''}
                           className="block py-4 text-base font-medium uppercase tracking-wider text-white transition-opacity hover:opacity-80"
                         >
-                          {item?.title}
+                          {item.title}
                         </CustomLink>
                       </DialogClose>
                     )}
