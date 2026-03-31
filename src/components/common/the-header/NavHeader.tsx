@@ -4,11 +4,17 @@ import React from 'react';
 
 import { NAVIGATION_DATA, NavigationItem } from '@/src/constants/navigation';
 
-export default function NavHeader({ isScrolled }: { isScrolled?: boolean }) {
+export default function NavHeader({
+  isScrolled,
+  data,
+}: {
+  isScrolled?: boolean;
+  data?: any;
+}) {
   return (
     <nav className="relative z-[100] w-full">
       <ul className="flex items-center gap-6 xl:gap-8">
-        {NAVIGATION_DATA.map((item: NavigationItem, index: number) => {
+        {data?.map((item: NavigationItem, index: number) => {
           const hasSubItems = (item.sub_items?.length ?? 0) > 0;
 
           return (

@@ -34,6 +34,9 @@ const sectionMap: SectionMap = {
   'number-grid': dynamic(() =>
     import('../components/sections/number').then((m) => m.NumberGrid),
   ),
+  'number-basic': dynamic(() =>
+    import('../components/sections/number').then((m) => m.NumberBasic),
+  ),
   'gallery-with-text': dynamic(() =>
     import('../components/sections/gallery').then((m) => m.GalleryWithText),
   ),
@@ -219,7 +222,7 @@ const PageBuilder = ({ pageContent, pageDetail }: PageBuilderProps) => {
 
   return (
     <>
-      <main className="padding-top-body">
+      <main className={pageContent.slug === 'trang-chu' ? '' : 'padding-top-body'}>
         {sections.map((section: CommonSection, index: number) => {
           const SectionComp = sectionMap[section.type];
           if (!SectionComp) return null;

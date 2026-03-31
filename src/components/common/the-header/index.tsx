@@ -11,7 +11,7 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/src/lib/utils';
 import { SOCIAL_LINKS } from '@/src/constants/footer';
 
-export default function TheHeader() {
+export default function TheHeader({ data }: { data?: any }) {
   const t = useTranslations('Href');
   const [isScrolled, setIsScrolled] = useState(false);
   const router = useRouter();
@@ -32,6 +32,29 @@ export default function TheHeader() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const { contact_information } = useMetadata();
+  const contact = contact_information?.[0] || {};
+
+  const socialLinks = [
+    {
+      src: '/assets/icons/facebook.svg',
+      alt: 'facebook',
+      href: contact.facebook_url,
+    },
+    {
+      src: '/assets/icons/youtube.svg',
+      alt: 'youtube',
+      href: contact.youtube_url,
+    },
+    {
+      src: '/assets/icons/messenger.svg',
+      alt: 'messenger',
+      href: contact.messenger_url,
+    },
+  ].filter((link) => link.href);
+
+  const finalSocialLinks = socialLinks.length > 0 ? socialLinks : SOCIAL_LINKS;
 
   return (
     <header
@@ -60,7 +83,7 @@ export default function TheHeader() {
           </Link>
 
           <div className="mt-1 hidden 2xl:block">
-            <NavHeader isScrolled={isScrolled} />
+            <NavHeader isScrolled={isScrolled} data={data} />
           </div>
         </div>
 
@@ -86,9 +109,7 @@ export default function TheHeader() {
               <input
                 type="text"
                 placeholder="Tìm kiếm..."
-                onChange={(e) => {
-                  /* Optional: could add local state, but usually handled in form or handled dynamically */
-                }}
+                onChange={(e) => {}}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter')
                     handleSearch('search', e.currentTarget.value);
@@ -98,10 +119,10 @@ export default function TheHeader() {
             </div>
 
             <div className="flex items-center gap-4">
-              {SOCIAL_LINKS.map((icon, index) => (
+              {finalSocialLinks.map((icon, index) => (
                 <Link
                   key={index}
-                  href={icon.href}
+                  href={icon.href as any}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white transition-opacity hover:opacity-80"
@@ -118,7 +139,7 @@ export default function TheHeader() {
 
           <div className="flex items-center gap-4">
             <div className="block 2xl:hidden">
-              <MobileMenu handleSearch={handleSearch} />
+              <MobileMenu handleSearch={handleSearch} data={data} />
             </div>
           </div>
         </div>

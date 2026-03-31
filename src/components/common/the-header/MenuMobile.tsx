@@ -19,19 +19,36 @@ import {
 import CustomLink from '../custom-link';
 import { Link } from '@/src/i18n/navigation';
 
+import { useMetadata } from '@/src/providers/MetadataProvider';
+
 type MobileMenuProps = {
   handleSearch: (key: string, value: string) => void;
+  data?: any;
 };
 
 // Dummy navigation mapped to the design requirements
 import { NAVIGATION_DATA, NavigationItem } from '@/src/constants/navigation';
 
+export default function MobileMenu({ handleSearch, data }: MobileMenuProps) {
+  const { contact_information } = useMetadata();
+  const contact = contact_information?.[0] || {};
 
-export default function MobileMenu({ handleSearch }: MobileMenuProps) {
+  const socialLinks = [
+    { src: '/assets/icons/facebook.svg', alt: 'facebook', href: contact.facebook_url },
+    { src: '/assets/icons/youtube.svg', alt: 'youtube', href: contact.youtube_url },
+    { src: '/assets/icons/messenger.svg', alt: 'messenger', href: contact.messenger_url },
+    { src: '/assets/icons/telegram.svg', alt: 'telegram', href: contact.telegram_url },
+    { src: '/assets/icons/zalo.svg', alt: 'zalo', href: contact.zalo_url },
+    { src: '/assets/icons/tiktok.svg', alt: 'tiktok', href: contact.tiktok_url },
+  ].filter(link => link.href && link.href !== '#');
+
   const [isOpenSubMenu, setIsOpenSubMenu] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>('');
   const { lenis } = useScrollSmoother();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  const navData =
+    data && data.length > 0 ? (data as NavigationItem[]) : NAVIGATION_DATA;
 
   return (
     <Dialog>
@@ -135,7 +152,7 @@ export default function MobileMenu({ handleSearch }: MobileMenuProps) {
               type="multiple"
               defaultValue={['item-1', 'item-3']}
             >
-              {NAVIGATION_DATA.map((item: NavigationItem, index: number) => {
+              {navData.map((item: NavigationItem, index: number) => {
                 const hasSubItems = (item.sub_items?.length ?? 0) > 0;
 
                 return (
@@ -275,36 +292,25 @@ export default function MobileMenu({ handleSearch }: MobileMenuProps) {
                 Theo dõi chúng tôi trên
               </p>
               <div className="flex items-center gap-6">
-                <Link
-                  href="#"
-                  className="text-white transition-opacity hover:opacity-80"
-                >
-                  <img
-                    src="/assets/icons/facebook.svg"
-                    alt="Facebook"
-                    className="size-6"
-                  />
-                </Link>
-                <Link
-                  href="#"
-                  className="text-white transition-opacity hover:opacity-80"
-                >
-                  <img
-                    src="/assets/icons/youtube.svg"
-                    alt="Youtube"
-                    className="size-6"
-                  />
-                </Link>
-                <Link
-                  href="#"
-                  className="text-white transition-opacity hover:opacity-80"
-                >
-                  <img
-                    src="/assets/icons/messenger.svg"
-                    alt="Messenger"
-                    className="size-6"
-                  />
-                </Link>
+                {(socialLinks.length > 0 ? socialLinks : [
+                  { src: '/assets/icons/facebook.svg', alt: 'facebook', href: '#' },
+                  { src: '/assets/icons/youtube.svg', alt: 'youtube', href: '#' },
+                  { src: '/assets/icons/messenger.svg', alt: 'messenger', href: '#' },
+                ]).map((icon, idx) => (
+                  <Link
+                    key={idx}
+                    href={icon.href as any}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white transition-opacity hover:opacity-80"
+                  >
+                    <img
+                      src={icon.src}
+                      alt={icon.alt}
+                      className="size-6 brightness-0 invert"
+                    />
+                  </Link>
+                ))}
               </div>
             </div>
           </div>

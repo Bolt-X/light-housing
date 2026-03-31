@@ -10,11 +10,6 @@ export const fnGetPageBySlug = async (slug: string) => {
     const res = await directusClientWithRest.request(
       readItem('pages', slug, {
         fields: ['raw_content'],
-        filter: {
-          scope: {
-            _eq: PROJECT_CONSTANTS.SCOPE,
-          },
-        },
       }),
     );
 

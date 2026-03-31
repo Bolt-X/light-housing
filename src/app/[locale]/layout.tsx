@@ -3,6 +3,7 @@ import '../../styles/globals.css';
 
 import { ThemeProvider } from '../../providers/theme-provider';
 import { fnGetMetadata } from '../../services/metadata';
+import { fnGetTopNavBySlug, fnGetBottomNavBySlug } from '../../services/pages';
 import { MetadataProvider } from '../../providers/MetadataProvider';
 import { GsapMatchMediaProvider } from '../../providers/GsapMatchMediaProvider';
 import { ScrollSmootherProvider } from '../../providers/ScrollSmootherProvider';
@@ -147,10 +148,15 @@ export default async function RootLayout({
 
   setRequestLocale(locale);
 
-  const [metadata, messages] = await Promise.all([
+  const [metadata, messages, topNav, bottomNav] = await Promise.all([
     fnGetMetadata(locale),
     getMessages({ locale }),
+    fnGetTopNavBySlug('top-nav'),
+    fnGetBottomNavBySlug('bottom-nav'),
   ]);
+
+  const topNavContent = (topNav?.[0] as any)?.raw_content || [];
+  const bottomNavContent = (bottomNav?.[0] as any)?.raw_content || [];
 
   return (
     <html
@@ -223,12 +229,12 @@ export default async function RootLayout({
                 <GsapMatchMediaProvider>
                   <ScrollSmootherProvider>
                     <Loading />
-                    <TheHeader />
+                    <TheHeader data={topNavContent} />
                     <Suspense fallback={<LoadingComp />}>
                       {/* <BackToTop /> */}
                       {children}
                     </Suspense>
-                    <TheFooter />
+                    <TheFooter data={bottomNavContent} />
                   </ScrollSmootherProvider>
                 </GsapMatchMediaProvider>
               </ThemeProvider>

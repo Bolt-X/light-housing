@@ -9,7 +9,14 @@ import {
 } from '@/src/constants/footer';
 import { Link } from '@/src/i18n/navigation';
 
-const TheFooter = (): React.ReactNode => {
+import { useMetadata } from '@/src/providers/MetadataProvider';
+
+const TheFooter = ({ data }: { data?: any }): React.ReactNode => {
+  const { contact_information } = useMetadata();
+  const contact = contact_information?.[0] || {};
+
+  const navData = data && data.length > 0 ? (data as any[]) : ABOUT_LINKS;
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -26,6 +33,47 @@ const TheFooter = (): React.ReactNode => {
     e.preventDefault();
   };
 
+  const dynamicContactInfo = [
+    {
+      icon: '/assets/icons/map_point.svg',
+      alt: 'map',
+      text: contact.address || CONTACT_INFO[0].text,
+      href: contact.address_url || CONTACT_INFO[0].href,
+    },
+    {
+      icon: '/assets/icons/mail.svg',
+      alt: 'mail',
+      text: contact.email || CONTACT_INFO[1].text,
+      href: contact.email_url || CONTACT_INFO[1].href,
+    },
+    {
+      icon: '/assets/icons/phone.svg',
+      alt: 'phone',
+      text: contact.hot_line || CONTACT_INFO[2].text,
+      href: contact.hot_line_url || CONTACT_INFO[2].href,
+    },
+  ];
+
+  const socialLinks = [
+    {
+      src: '/assets/icons/facebook.svg',
+      alt: 'facebook',
+      href: contact.facebook_url,
+    },
+    {
+      src: '/assets/icons/youtube.svg',
+      alt: 'youtube',
+      href: contact.youtube_url,
+    },
+    {
+      src: '/assets/icons/messenger.svg',
+      alt: 'messenger',
+      href: contact.messenger_url,
+    },
+  ].filter((link) => link.href);
+
+  const finalSocialLinks = socialLinks.length > 0 ? socialLinks : SOCIAL_LINKS;
+
   return (
     <footer className="relative flex w-full flex-col gap-6 bg-[linear-gradient(143deg,rgba(2,58,92,1)_0%,rgba(115,175,214,1)_100%)] p-4 md:gap-8 md:p-8 lg:gap-10 lg:py-12 xl:gap-12 xl:py-12 2xl:p-20 3xl:py-[100px]">
       <div className="flex w-full flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-[60px] 4xl:mx-auto 4xl:max-w-[1880px]">
@@ -39,15 +87,16 @@ const TheFooter = (): React.ReactNode => {
 
           <div className="flex flex-col gap-4 md:gap-6">
             <h3 className="text-lg font-bold uppercase text-white xl:text-xl 4xl:text-[24px]">
-              {FOOTER_CONTENT.tagline} <br className="block md:hidden" />{' '}
-              {FOOTER_CONTENT.companyName}
+              {contact.footer_title || FOOTER_CONTENT.tagline}{' '}
+              <br className="block md:hidden" />{' '}
+              {contact.footer_description || FOOTER_CONTENT.companyName}
             </h3>
 
             <div className="flex flex-col gap-3">
-              {CONTACT_INFO.map((item, index) => (
+              {dynamicContactInfo.map((item, index) => (
                 <Link
                   key={index}
-                  href={item.href}
+                  href={item.href as any}
                   target="_blank"
                   className="flex cursor-pointer items-start gap-4 transition-transform hover:translate-x-1"
                 >
@@ -73,13 +122,13 @@ const TheFooter = (): React.ReactNode => {
             </h4>
 
             <nav className="flex flex-col gap-3 2xl:gap-4">
-              {ABOUT_LINKS.map((link, index) => (
+              {navData.map((link, index) => (
                 <a
                   key={index}
-                  href={link.href}
+                  href={link.url || link.href}
                   className="text-sm text-white/80 transition-colors hover:text-white md:text-base"
                 >
-                  {link.text}
+                  {link.title || link.text}
                 </a>
               ))}
             </nav>
@@ -92,7 +141,7 @@ const TheFooter = (): React.ReactNode => {
                 {FOOTER_CONTENT.followTitle}
               </h4>
               <div className="flex items-start gap-4 xl:gap-6">
-                {SOCIAL_LINKS.map((icon, index) => (
+                {finalSocialLinks.map((icon, index) => (
                   <a
                     key={index}
                     href={icon.href}
@@ -199,9 +248,16 @@ const TheFooter = (): React.ReactNode => {
       </div>
 
       <div className="flex w-full items-center justify-center border-t border-white/50 pt-6 text-center lg:pt-8 xl:items-start xl:justify-start xl:pt-10 xl:text-left xl:text-base 4xl:mx-auto 4xl:max-w-[1880px]">
-        <p className="text-sm font-normal text-white">
-          {FOOTER_CONTENT.copyright}
-        </p>
+        {contact.copy_right ? (
+          <div
+            className="text-sm font-normal text-white"
+            dangerouslySetInnerHTML={{ __html: contact.copy_right }}
+          />
+        ) : (
+          <p className="text-sm font-normal text-white">
+            {FOOTER_CONTENT.copyright}
+          </p>
+        )}
       </div>
     </footer>
   );
