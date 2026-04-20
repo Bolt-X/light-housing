@@ -83,7 +83,7 @@ const CardSlider = (): React.ReactNode => {
 
   return (
     <div ref={containerRef} id="container" className="w-full bg-[#023A5C]">
-      <div className="container relative flex w-full flex-col items-center justify-center gap-12 py-10 xl:flex-row xl:gap-[60px] xl:py-[60px] 3xl:py-[100px]">
+      <div className="container relative flex min-h-[640px] w-full flex-col items-center justify-center gap-12 py-10 xl:flex-row xl:gap-[60px] xl:py-[60px] 3xl:min-h-[720px] 3xl:py-[100px]">
         <img
           className="pointer-events-none absolute right-0 top-0 hidden h-full w-full select-none object-cover lg:block"
           alt="Bg pattern"
@@ -124,7 +124,7 @@ const CardSlider = (): React.ReactNode => {
                     key={project.id}
                     onClick={() => setActiveIndex(index)}
                     className={`pin-trigger group absolute flex -translate-x-1/2 -translate-y-full cursor-pointer flex-col items-center justify-end transition-all duration-500 ease-out ${
-                      isActive ? 'z-10 scale-[1.5]' : 'z-10 scale-90 opacity-80'
+                      isActive ? 'z-10 scale-[1.2]' : 'z-10 scale-90 opacity-80'
                     }`}
                     style={{
                       top: project.position.top,
@@ -133,7 +133,7 @@ const CardSlider = (): React.ReactNode => {
                     title={project.name}
                   >
                     {isActive && (
-                      <div className="absolute flex h-8 w-8 animate-ping items-center justify-center rounded-full bg-brand opacity-30"></div>
+                      <div className="pointer-events-none absolute flex h-8 w-8 animate-ping items-center justify-center rounded-full bg-brand opacity-30"></div>
                     )}
 
                     {/* CSS Map Marker */}
