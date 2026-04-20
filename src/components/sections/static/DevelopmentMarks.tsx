@@ -150,40 +150,53 @@ export const DevelopmentMarks = (): React.ReactNode => {
               id="right-panel-content"
               className="flex flex-col gap-4 lg:gap-6"
             >
-              <div className="text-lg font-bold text-brand-dark">
-                {activeProject.name}
+              <div className="flex flex-col gap-1">
+                {!activeProject.isReleased && (
+                  <span className="w-fit rounded-full bg-brand/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand">
+                    Sắp ra mắt
+                  </span>
+                )}
+                <div className="text-lg font-bold text-brand-dark">
+                  {activeProject.name}
+                </div>
               </div>
 
               <div className="flex flex-col gap-4">
-                {detailRows.map((row, rowIndex) => (
-                  <div
-                    key={rowIndex}
-                    className="flex flex-col gap-4 border-b border-dashed border-gray-200 pb-2 lg:pb-4"
-                  >
-                    <div className="flex justify-between gap-4">
-                      {row.map((item, itemIndex) => (
-                        <div
-                          key={itemIndex}
-                          className="flex flex-1 flex-col gap-1"
-                        >
-                          <div className="text-xs text-[#8384A0]">
-                            {item.label}
-                          </div>
-
+                {detailRows.length > 0 ? (
+                  detailRows.map((row, rowIndex) => (
+                    <div
+                      key={rowIndex}
+                      className="flex flex-col gap-4 border-b border-dashed border-gray-200 pb-2 lg:pb-4"
+                    >
+                      <div className="flex justify-between gap-4">
+                        {row.map((item, itemIndex) => (
                           <div
-                            className={`text-sm font-semibold ${
-                              item.isSuccess
-                                ? 'text-green-700'
-                                : 'text-[#2F3037]'
-                            }`}
+                            key={itemIndex}
+                            className="flex flex-1 flex-col gap-1"
                           >
-                            {item.value}
+                            <div className="text-xs text-[#8384A0]">
+                              {item.label}
+                            </div>
+  
+                            <div
+                              className={`text-sm font-semibold ${
+                                item.isSuccess
+                                  ? 'text-green-700'
+                                  : 'text-[#2F3037]'
+                              }`}
+                            >
+                              {item.value}
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
+                  ))
+                ) : (
+                  <div className="py-10 text-center text-sm italic text-gray-400">
+                    Thông tin dự án đang được cập nhật. Vui lòng quay lại sau.
                   </div>
-                ))}
+                )}
               </div>
 
               <div className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg text-brand-dark transition-colors">

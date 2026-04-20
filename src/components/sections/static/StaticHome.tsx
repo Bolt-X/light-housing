@@ -18,7 +18,7 @@ const StaticHome = () => {
       <GreenFreqSection />
       <ProjectsSection />
       <HomePurchaseNotebook />
-      {/* <DevelopmentMarks /> */}
+      <DevelopmentMarks />
       <NewsSection />
       <PartnerSection />
     </div>
